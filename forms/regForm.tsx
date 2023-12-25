@@ -50,13 +50,33 @@ const RegForm = ({onShowDate, date, setReg, submitForm, errInData}: any) => {
                         }}
                     />
                 </View>
-
+                <View style={styles.appliName}>
+                    <MyTextInput 
+                        label="Gender:" 
+                        inputErr={errInData.lname}
+                        inputConfig={{
+                            placeholder:"Gender",
+                            onChangeText:setReg.bind(this, 'gender')
+                        }}
+                    />
+                </View>
+                <View style={styles.appliName}>
+                    <MyTextInput 
+                        label="Class:" 
+                        inputErr={errInData.lname}
+                        inputConfig={{
+                            placeholder:"Class",
+                            onChangeText:setReg.bind(this, 'class')
+                        }}
+                    />
+                </View>
                 <View style={styles.appliName}>
                     <MyTextInput 
                         label="email:" 
                         inputErr={errInData.lname}
                         inputConfig={{
                             placeholder:"email",
+                            keyboardType: "email",
                             onChangeText:setReg.bind(this, 'email')
                         }}
                     />
@@ -66,6 +86,7 @@ const RegForm = ({onShowDate, date, setReg, submitForm, errInData}: any) => {
                         label="password:" 
                         inputErr={errInData.lname}
                         inputConfig={{
+                            secureTextEntry: true,
                             placeholder:"password",
                             onChangeText:setReg.bind(this, 'password')
                         }}

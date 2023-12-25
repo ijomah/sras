@@ -1,13 +1,66 @@
 import React, {useState} from "react";
-import { SafeAreaView, TouchableOpacity, StyleSheet, ScrollView, Text, View } from "react-native";
-import { MultiSelect } from "react-native-element-dropdown";
+import { SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Text, View, Button, Alert } from "react-native";
+import { Dropdown, MultiSelect } from "react-native-element-dropdown";
 import { AntDesign } from '@expo/vector-icons';
 
-import { docTypeArr } from "../data";
-import DocumentType from "../documentType";
+import { docTypeArr } from "../../data";
+import MyTextInput from "../../unitParts/reuseTextInput";
+import { isInputValid } from "../../unitParts/errFunc";
 
-const ExamScore = () => {
+const NoteScore = () => {
     const [selected, setSelected] = useState([]);
+    
+    const [userForm, setUserForm] = useState({
+        userKey: Math.random().toString(35).substring(1),
+        // label: '',
+        // value: '',
+    })
+    const [errForRegInput, setErrForRegInput] = useState({});
+
+    // const dispatch = useDispatch();
+    // const navigation = useNavigation();
+
+
+    const setReg = (valIdentifier: any, typedVal: any) => {
+        // console.log('identifier-val', valIdentifier, typedVal)
+        setUserForm({...userForm, [valIdentifier]: typedVal})
+        console.log('state part', userForm)
+    }
+
+    const submitForm = async () => {
+        // await storeData(userForm);
+        if(!isInputValid(userForm).isErr) {
+
+            return setErrForRegInput(isInputValid(userForm).errObj);
+         }
+        //  '/api/v1/register'
+        // saveData(userForm);
+        // axios.post(BACKEND_URL+'/api/v1/register',
+        //     userForm
+        // ).then((postRes) => {
+        //     storeData({...postRes.data[0], date: new Date().toISOString()})
+        // })
+        // .catch((error) => {
+        //     console.log('axios post regErr', error);
+        // })
+        // dispatch(addRegFormTo(userForm));
+
+        Alert.alert(
+            'Form', 
+            'Form Submitted!',
+            [{  
+                text: 'Ok',
+                // onPress: () => navigation.navigate('login')
+            }]
+            )
+
+            // readUserTable().then((dat) => {
+            //     console.log('Checking local db id', dat);
+            //    let phoneDbId = dat.rows._array[0].dbUser_id
+            // console.log('phoneDbId', phoneDbId)
+            // })
+    }
+    
 
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
         return (
@@ -22,7 +75,7 @@ const ExamScore = () => {
             </View>
         );
     };
-
+    
     return (
 
         <SafeAreaView>
@@ -69,11 +122,39 @@ const ExamScore = () => {
                 )}
             />
             </ScrollView>
+            <View style={{
+                marginTop:10, 
+                backgroundColor:'red',
+                alignItems: 'center'    
+            }}>
+                <MyTextInput 
+                    label="Enter Note/Project Score" 
+                    inputErr={undefined} 
+                    inputConfig={{
+                        multiline: false,
+                        textAlignVertical: 'top',
+                        numberOfLines: 6,
+                        maxLength: 2,
+                        keyboardType:"phone-pad",
+                        onChangeText:(val1: any)=>setReg('note', val1)
+                        // onChangeText:setReg.bind(this, 'note')
+                    }} 
+                />
+            </View>
+            <View 
+                style={{
+                    marginTop:78,
+                }}>
+                <Button 
+                    title="Submit"
+                    onPress={()=>{}}
+                />
+            </View>
         </SafeAreaView>
     )
 }
 
-export default ExamScore;
+export default NoteScore;
 
 const styles = StyleSheet.create({
     dropdownPages: {

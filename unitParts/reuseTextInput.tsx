@@ -13,10 +13,10 @@ const MyTextInput = ({label, inputErr, inputConfig}: any) => {
         //     <TextInput style={styles.input} {...inputConfig} />
         // </View>
         <SafeAreaView style={{flex: 0.0001, flexDirection:'row'}}>
-            <View style={styles.inputContainer}>
+            <View style={[ inputConfig.multiline? styles.multinputBox: styles.inputContainer ]}>
                         <Text style={styles.inputLabel}>{label}</Text>
                         <TextInput {...inputConfig}
-                            style={styles.input}
+                            style={[ inputConfig.multiline? styles.multinput: styles.input ]}
                             // placeholder="joe@mail.com"
                             // value={email}
                             // onChangeText={handleChangeEmail} 
@@ -93,6 +93,19 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 10,
         padding: 15
+    },
+    multinput: {
+        borderWidth: 3,
+        // borderColor: '#FFEDD6',
+        borderColor: '#5CBFAB',
+        height: 120,
+        borderRadius: 10,
+        padding: 15,
+        width: '100%',
+    },
+    multinputBox:{
+        width: 300,
+        height: 75
     },
     inputLabel: {
         fontSize: 20,

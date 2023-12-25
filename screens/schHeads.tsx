@@ -3,6 +3,7 @@ import { SafeAreaView, Button, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
+import { studentList } from '../data';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -94,10 +95,10 @@ import AntDesign from '@expo/vector-icons/AntDesign';
                     selectedTextStyle={styles.selectedTextStyle}
                     inputSearchStyle={styles.inputSearchStyle}
                     iconStyle={styles.iconStyle}
-                    data={data}
+                    data={studentList}
                     search
                     maxHeight={300}
-                    labelField="label"
+                    labelField="name"
                     valueField="value"
                     placeholder={!isFocus ? 'Select item' : '...'}
                     searchPlaceholder="Search..."

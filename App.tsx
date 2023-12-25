@@ -13,7 +13,8 @@ import ResultViewer from './screens/resultViewer';
 import ManageRegForm from './forms/manageRegForm';
 
 
-import ResultEditDrawer from './drawerScreen/drawer';
+import ResultEditDrawer from './drawers/resultEntry/drawer';
+import ResultViewDrawer from './drawers/resultView/viewDrawer';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
@@ -30,8 +31,13 @@ export default function App() {
         <Screen name='resultView' component={ResultViewer} />
         <Screen name='studentReg' component={ManageRegForm} />
         
-        <Screen name='drawer' 
+        <Screen name='editDrawer' 
           component={ResultEditDrawer}
+          options={{headerShown: false}}
+        />
+
+        <Screen name='viewDrawer' 
+          component={ResultViewDrawer}
           options={{headerShown: false}}
         />
       </Navigator>

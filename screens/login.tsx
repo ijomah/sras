@@ -55,6 +55,7 @@ function LoginPage({navigation}: any) {
                     <TextInput
                         style={styles.input}
                         placeholder="Password"
+                        secureTextEntry={true}
                         value={password}
                         keyboardType="visible-password"
                         onChangeText={handleChangePassword}

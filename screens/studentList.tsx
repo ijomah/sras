@@ -23,14 +23,14 @@ const StudentList = ({navigation}: any) => {
     const showStudList = ({item}: any) => {
         return (
             <TouchableOpacity
-                style={styles.studentNameStyle}
+                style={styles.pressable}
                 onPress={() => {
                     //goto drawer
-                    navigation.push('drawer')
+                    navigation.navigate('editDrawer')
                 }}
             >
-                <Text>{item.name
-                }</Text>
+                <Text>{item.name}
+                </Text>
             </TouchableOpacity>
         )
     }
@@ -53,5 +53,33 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 100, 
         width: 350
-    }
+    },
+
+    pressable: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        borderRadius: 14,
+        width: 250,
+        height: 100,
+        margin: 5,
+        backgroundColor: 'white',
+        shadowColor: '#000',
+        marginTop: 8,
+        marginRight: 12,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+  
+        elevation: 2,
+        borderColor: '#5C8FAB',
+        borderWidth: 2
+    },
+
+
 })
