@@ -9,7 +9,8 @@ const Dashboard = ({navigation}: any) => {
         {id: 3, do: 'studentReg', title: "Register student"},
         {id: 4, do: 'admin', title: "Admin Section"}
     ]
-   
+    // #56DB32 -green color
+    //#DB6D32 - gold
     const renderThem = ({item}: any) => {
         return (
             <View>
@@ -19,7 +20,7 @@ const Dashboard = ({navigation}: any) => {
                         marginTop: 10,
                         height: 200, 
                         width: 300}} 
-                    source={require('../assets/splash.png')}
+                    source={require('../assets/dashIcon.jpeg')}
                     resizeMethod="scale"
                 />
                 {/* <Text>{item.title}</Text> */}

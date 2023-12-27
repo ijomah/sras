@@ -1,36 +1,83 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import Checkbox, { CheckboxEvent } from 'expo-checkbox';
 
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+
+import { Alert, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
 
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
+import { StudentContext } from '../../context/studContext';
 
 export default function AffectiveEntry(props: any) {
-  const [affectiveData, setAffetiveData] = useState([]);
+  const [affectiveData, setAffetiveData] = useState([{
+            id: '0', 
+            name: '', 
+            title: '',
+            indexPosition: ''
+        }]);
   const [isChecked, setChecked] = useState(false);
-  const {tableHeadDet, tableBodyDet}  = props
+  const {tableHeadDet, tableBodyDet, route}  = props
       if (tableHeadDet === undefined && tableBodyDet === undefined) {
         const val = {
             tableHead: ['Title', '1', '2', '3', '4', '5'],
             widthArr: [200, 60, 60, 60, 60, 60]
         }
-            const [tableVal, setTableVal] = useState(val);
-                
-            function _alertIndex(index: any, data: any) {
-                Alert.alert(`You Picked ${data} ${index}`);
-                setChecked(true);
-              }
+        
+        const [tableVal, setTableVal] = useState(val);
+        const studentData = useContext(StudentContext);
+        let itm = `
+            <Checkbox
+                style={styles.checkbox}
+                value={isChecked}
+                // onChange={(event) => setCheckedBox(event)}
+                onValueChange={()=>{
+                    setCheckedBox(para[0], para[1], para[2], para[3])
+                }}
+                color={isChecked ? '#4630EB' : undefined}
+            />`;
+
+    function _alertIndex( data: any, biggerIndex: any, smallerIndex: any, title: any) {
+                let studentMeta = Object.assign({}, studentData, {title:title, indexPosition: biggerIndex.toString()+smallerIndex.toString()})
+        affectiveData.forEach((oneMeta) => {
+            if(oneMeta.indexPosition[0] === biggerIndex.toString()) {
+                 let oneMetaIdx = affectiveData.indexOf(oneMeta);
+                 
+                        Alert.alert('You Picked duplicate value on the same title');
+                setAffetiveData(
+                    // affectiveData.filter(t => t.indexPosition !== (biggerIndex+smallerIndex))
+                    affectiveData.filter(t => t.indexPosition[0] !== biggerIndex.toString())
+                )       
+                // setAffetiveData([...affectiveData, studentMeta ]);
+                    } else {
+                        console.log('oneMeta.indexPosition[0]', biggerIndex, affectiveData)
+                        
+                        setAffetiveData([...affectiveData, studentMeta ]);
+                        ToastAndroid.show(`You Picked ${data} from ${title}`, ToastAndroid.SHORT)
+                    }
+
+                })
+        //   setAffetiveData(
+        //                     // affectiveData.filter(t => t.indexPosition !== (biggerIndex+smallerIndex))
+        //                     affectiveData.filter(t => t.indexPosition[0] !== biggerIndex.toString())
+        //                 )           
+    }
 
             const state = {...tableVal};
             let tableData: any[] = [
-                ['0', '1', '2', '3', '4', '5'],
-                ['0', '1', '2', '3', '4', '5'],
-                ['0', '1', '2', '3', '4', '5'],
-                ['0', '1', '2', '3', '4', '5'],
+                ['title0', '1', '2', '3', '4', '5'],
+                ['title1', '1', '2', '3', '4', '5'],
+                ['title2', '1', '2', '3', '4', '5'],
+                ['title3', '1', '2', '3', '4', '5'],
               ];
-
+            // let tableData: any[] = [
+            //     ['title0', itm, itm, itm, itm, itm],
+            //     ['title1', itm, itm, itm, itm, itm],
+            //     ['title2', itm, itm, itm, itm, itm],
+            //     ['title3', itm, itm, itm, itm, itm],
+            //   ];
+            //   tableData.forEach()
             // for (let i = 0; i < 10; i += 1) {
             //     const rowData = [];
             //     for (let j = 0; j < 6; j += 1) {
@@ -38,24 +85,72 @@ export default function AffectiveEntry(props: any) {
             //     }
             //     tableData.push(rowData);
             //   } 
-              const setCheckedBox = (e: any) => {
-                console.log(e)
+              const setCheckedBox = (...varData: any) => {
+                console.log('I am her');
+                setChecked(true);
               }
 
-            const element = (data: any, index: any) => {
-                console.log('dat', isChecked, data, index)
+    const purgeData = (idxI: number, idxJ: number, title: string) => {
+        let arrForWork: any[] = [{
+            id: '0', 
+            name: '', 
+            title: '',
+            indexPosition: ''
+        }];
+        
+//collect all entered data
+        //match each with student context data
+        // validate each for duplicate
+        //inform the user if duplicate exists
+        //accept changes
+        //save to state.
+        let studentMeta: object = Object.assign({}, 
+            studentData,
+            {
+                title: title, 
+                indexPosition: idxI.toString()+idxJ.toString()
+            }
+        )
+        arrForWork.push(studentMeta);
+        console.log('purge', idxI, affectiveData);
+        arrForWork.forEach((checkDatum) =>{
+            if(idxI.toString() === checkDatum.indexPosition[0]) {
+                Alert.alert(
+                    `You Picked duplicate value on the same title, 
+                    we\'ve replaced the former`);
+                let studentOneMeta = Object.assign({}, 
+                        studentData,
+                        {
+                            title: title, 
+                            indexPosition: idxI.toString()+idxJ.toString()
+                        }
+                    )
+                arrForWork.splice(arrForWork.indexOf(checkDatum), 1, studentOneMeta);
+
+            }
+
+            if(checkDatum.title === undefined || checkDatum.title === '') {
+                arrForWork.splice(arrForWork.indexOf(checkDatum), 1);
+                setAffetiveData([...affectiveData, ...arrForWork]);
+                // console.log('purge2', idxI);
+            }
+
+        })
+        // setAffetiveData([...affectiveData, studentMeta]);
+        setAffetiveData(
+            affectiveData.filter(dataFilter => dataFilter.title !== undefined || dataFilter.title !== '')
+        )
+    }
+            // const element = (data: any, bigIndex: any, smallIndex: any, title: any) => {
+            const element = (...para: any) => {
+                // console.log(para[0], para[1], para[2], para[3]);
                 return (
                     <TouchableOpacity 
-                        onPress={() => {_alertIndex(index, data)}}
+                        onPress={() => {_alertIndex(para[0], para[1], para[2], para[3])}}
+                        // onPress={() => {_alertIndex(data, bigIndex, smallIndex, title)}}
                     >
                     {/* <View style={styles.section}>
-                        <Checkbox
-                            style={styles.checkbox}
-                            value={false}
-                            onChange={(itm) => setCheckedBox(itm)}
-                            color={isChecked ? '#4630EB' : undefined}
-                        />
-                        <Text style={styles.paragraph}></Text>
+                        
                     </View> */}
                     <View style={styles.btn}>
                         <Text 
@@ -71,7 +166,11 @@ export default function AffectiveEntry(props: any) {
 
             return (
             <View style={styles.container}>
-              <Text>AFFECTIVE DOMAIN</Text>
+              <Text 
+                style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
+              >
+                AFFECTIVE DOMAIN
+              </Text>
                         <ScrollView horizontal={true} >
                         <View>
                             <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>
@@ -90,13 +189,6 @@ export default function AffectiveEntry(props: any) {
                                     //     setfilteredTableArr(tableData)
                                     // filteredTableArr
                                     tableData.map((rowData, index) => (
-                                        // <Row
-                                        //     key={index}
-                                        //     data={rowData}
-                                        //     widthArr={state.widthArr}
-                                        //     style={[styles.row, {backgroundColor: '#F7F6E7'}]}
-                                        //     textStyle={styles.text}
-                                        // />
                                         <TableWrapper key={index} style={styles.tableWrapperRow}>
                                             {
                                                 rowData.map((cellData: any, cellIndex: any) => (
@@ -107,7 +199,7 @@ export default function AffectiveEntry(props: any) {
                                                         key={cellIndex} 
                                                         data={
                                                             cellIndex > 0? 
-                                                                    element(cellData, index) 
+                                                                    element(cellData, index, cellIndex, rowData[0]) 
                                                                 :   cellData
                                                         } 
                                                         textStyle={styles.text} 
@@ -194,4 +286,5 @@ const styles = StyleSheet.create({
       checkbox: {
         margin: 8,
       },
+     
     });    

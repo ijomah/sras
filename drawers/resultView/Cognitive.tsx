@@ -29,7 +29,9 @@ export default function CognitPage(props: any) {
                   }   
                   return (
                   <View style={styles.container}>
-                    <Text>CONGITIVE DOMAIN</Text>
+                    <Text
+                      style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
+                    >CONGITIVE DOMAIN</Text>
                       <ScrollView horizontal={true} >
                       <View>
                           <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>

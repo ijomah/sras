@@ -1,6 +1,6 @@
 import { DefaultTheme } from "@react-navigation/native";
 import React from "react";
-import { SafeAreaView, StyleSheet, FlatList, TouchableOpacity, Text } from "react-native";
+import { SafeAreaView, Image, StyleSheet, FlatList, TouchableOpacity, Text, View } from "react-native";
 
 // import { places } from "../data";
 
@@ -10,15 +10,16 @@ const StudentList = ({navigation}: any) => {
     // to get the (or his/her) right student list)
     // array of objs with db id and student name 
     //from student and name table
-    const studentListFromSlice: any[] = [
-        { name: 'Student 1', value: '1' },
-    { name: 'Student 2', value: '2' },
-    { name: 'Student 3', value: '3' },
-    { name: 'Student 4', value: '4' },
-    { name: 'Student 5', value: '5' },
-    { name: 'Student 6', value: '6' },
-    { name: 'Student 7', value: '7' },
-    { name: 'Student 8', value: '8' },
+    const studentListFromSlice: object[] = [
+        //sch id is needed here for the sake of the sch_id column
+        { name: 'Student 1', id: '1' },
+        { name: 'Student 2', id: '2' },
+        { name: 'Student 3', id: '3' },
+        { name: 'Student 4', id: '4' },
+        { name: 'Student 5', id: '5' },
+        { name: 'Student 6', id: '6' },
+        { name: 'Student 7', id: '7' },
+        { name: 'Student 8', id: '8' },
     ];
     const showStudList = ({item}: any) => {
         return (
@@ -26,17 +27,27 @@ const StudentList = ({navigation}: any) => {
                 style={styles.pressable}
                 onPress={() => {
                     //goto drawer
-                    navigation.navigate('editDrawer')
+                    navigation.navigate('editDrawer', {
+                                    name: item.name,
+                                    id: item.id
+                                })
                 }}
             >
-                <Text>{item.name}
-                </Text>
+                <View>
+                    <Image 
+                        source={require('../assets/IconStudHead.jpeg')}
+                        style={{width:70, height:60,}}
+                    />
+                    <Text>{item.name}
+                    </Text>
+                </View>
             </TouchableOpacity>
         )
     }
 
     return (
         <FlatList 
+            style={styles.studentNameStyle}
             data={studentListFromSlice}
             renderItem={showStudList}
         />
@@ -48,11 +59,10 @@ export default StudentList;
 const styles = StyleSheet.create({
     studentNameStyle: {
         //put style
-        alignSelf: 'center',
-        backgroundColor: 'skyblue', 
+        alignSelf: 'center', 
         marginTop: 10,
         height: 100, 
-        width: 350
+        width: 260
     },
 
     pressable: {

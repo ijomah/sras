@@ -76,7 +76,7 @@ const RegForm = ({onShowDate, date, setReg, submitForm, errInData}: any) => {
                         inputErr={errInData.lname}
                         inputConfig={{
                             placeholder:"email",
-                            keyboardType: "email",
+                            // keyboardType: "email",
                             onChangeText:setReg.bind(this, 'email')
                         }}
                     />

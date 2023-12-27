@@ -1,28 +1,36 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
+import { StudentContext } from '../../context/studContext';
 
 export default function PsychomotorEntry(props: any) {
-  const [affectiveData, setAffetiveData] = useState([]);
-  const {tableHeadDet, tableBodyDet}  = props
+    
+  const [affectiveData, setAffetiveData] = useState([{}]);
+  const {tableHeadDet, tableBodyDet, route}  = props
       if (tableHeadDet === undefined && tableBodyDet === undefined) {
         const val = {
             tableHead: ['Title', '1', '2', '3', '4', '5'],
             widthArr: [200, 60, 60, 60, 60, 60]
         }
             const [tableVal, setTableVal] = useState(val);
+            const studentData = useContext(StudentContext);
                 
-            function _alertIndex(index: any, data: any) {
-                Alert.alert(`You Picked ${data} ${index}`);                
+            function _alertIndex( data: any, biggerIndex: any, smallerIndex: any, title: any) {
+                Alert.alert(`You Picked ${data} ${biggerIndex}`);
+                //What if   the user picks two btns on the same row
+                //What if the user wants to change the value picked by picking 
+                //another on the same row
+                let studentMeta = Object.assign({}, studentData, {title:title, indexPicked: biggerIndex+smallerIndex})
+                setAffetiveData([...affectiveData, studentMeta ]);
               }
 
             const state = {...tableVal};
             let tableData: any[] = [
-                ['0', '1', '2', '3', '4', '5'],
-                ['0', '1', '2', '3', '4', '5'],
-                ['0', '1', '2', '3', '4', '5'],
-                ['0', '1', '2', '3', '4', '5'],
+                ['title0', '1', '2', '3', '4', '5'],
+                ['title1', '1', '2', '3', '4', '5'],
+                ['title2', '1', '2', '3', '4', '5'],
+                ['title3', '1', '2', '3', '4', '5'],
               ];
 
             // for (let i = 0; i < 10; i += 1) {
@@ -36,11 +44,12 @@ export default function PsychomotorEntry(props: any) {
                 console.log(e)
               }
 
-            const element = (data: any, index: any) => {
-                console.log('dat', data, index)
+              const element = (...para: any) => {
+                console.log(para[0], para[1], para[2], para[3]);
                 return (
                     <TouchableOpacity 
-                        onPress={() => {_alertIndex(index, data)}}
+                        onPress={() => {_alertIndex(para[0], para[1], para[2], para[3])}}
+                        // onPress={() => {_alertIndex(data, bigIndex, smallIndex, title)}}
                     >
                     {/* <View style={styles.section}>
                         <Checkbox
@@ -65,7 +74,10 @@ export default function PsychomotorEntry(props: any) {
 
             return (
             <View style={styles.container}>
-              <Text>PSYCHOMOTOR DOMAIN</Text>
+              <Text
+                style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
+              >
+                PSYCHOMOTOR DOMAIN</Text>
                         <ScrollView horizontal={true} >
                         <View>
                             <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>
@@ -101,7 +113,7 @@ export default function PsychomotorEntry(props: any) {
                                                         key={cellIndex} 
                                                         data={
                                                             cellIndex > 0? 
-                                                                    element(cellData, index) 
+                                                                element(cellData, index, cellIndex, rowData[0]) 
                                                                 :   cellData
                                                         } 
                                                         textStyle={styles.text} 

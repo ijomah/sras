@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Text, View, Button, Alert } from "react-native";
 import { Dropdown, MultiSelect } from "react-native-element-dropdown";
 import { AntDesign } from '@expo/vector-icons';
@@ -6,12 +6,15 @@ import { AntDesign } from '@expo/vector-icons';
 import { docTypeArr } from "../../data";
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
+import { StudentContext } from "../../context/studContext";
 
-const NoteScore = () => {
+const NoteScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
-    
+    const studentData = useContext(StudentContext);
+
     const [userForm, setUserForm] = useState({
-        userKey: Math.random().toString(35).substring(1),
+        id: studentData.id,
+        name: studentData.name
         // label: '',
         // value: '',
     })
@@ -25,6 +28,7 @@ const NoteScore = () => {
         // console.log('identifier-val', valIdentifier, typedVal)
         setUserForm({...userForm, [valIdentifier]: typedVal})
         console.log('state part', userForm)
+    
     }
 
     const submitForm = async () => {
@@ -63,7 +67,8 @@ const NoteScore = () => {
     
 
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
-        return (
+          
+      return (
             <View style={styles.item}>
                 <Text style={styles.selectedTextStyle}>{item.label}</Text>
                 {/* <FontAwesomeIcon 

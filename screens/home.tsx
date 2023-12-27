@@ -17,7 +17,7 @@ const HomePage = ({navigation}: any) => {
                 <View style={styles.vendorLogoContainer}>
                    <Image
                         style={styles.vendorLogo} 
-                        source={require('./../assets/splash.png')} 
+                        source={require('./../assets/laptopchild.jpeg')} 
                     />
                 
                         <Button title="Login" onPress={()=>{{                            

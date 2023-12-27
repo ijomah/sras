@@ -1,11 +1,15 @@
+import React, {useContext} from "react";
 import { SafeAreaView, View, Text, StyleSheet, Button, Alert } from "react-native";
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { useState } from "react";
+import { StudentContext } from "../../context/studContext";
 
-export default function CommentPart(this: any) {
+export default function CommentPart(this: any, {getId}: any) {
+    const studentData = useContext(StudentContext);
     const [userForm, setUserForm] = useState({
-        userKey: Math.random().toString(35).substring(1),
+        id: studentData.id,
+        name: studentData.name,
         // label: '',
         // value: '',
     })
@@ -17,16 +21,18 @@ export default function CommentPart(this: any) {
 
     const setReg = (valIdentifier: any, typedVal: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
-        setUserForm({...userForm, [valIdentifier]: typedVal})
+        setUserForm({...userForm, [valIdentifier]: typedVal}) 
         console.log('state part', userForm)
+        
     }
 
     const submitForm = async () => {
+        // console.log('params id', route.params)  
         // await storeData(userForm);
-        if(!isInputValid(userForm).isErr) {
+        // if(!isInputValid(userForm).isErr) {
 
-            return setErrForRegInput(isInputValid(userForm).errObj);
-         }
+        //     return setErrForRegInput(isInputValid(userForm).errObj);
+        //  }
         //  '/api/v1/register'
         // saveData(userForm);
         // axios.post(BACKEND_URL+'/api/v1/register',
@@ -38,7 +44,7 @@ export default function CommentPart(this: any) {
         //     console.log('axios post regErr', error);
         // })
         // dispatch(addRegFormTo(userForm));
-
+        
         Alert.alert(
             'Form', 
             'Form Submitted!',
@@ -79,7 +85,7 @@ export default function CommentPart(this: any) {
                 }}>
                 <Button 
                     title="Submit"
-                    onPress={()=>{}}
+                    onPress={submitForm}
                 />
             </View>
         </SafeAreaView>
