@@ -1,15 +1,19 @@
 import { handleResponse, handleError } from './apiUtil';
-// const baseUrl = process.env.RN_APP_API_URL + '/api/v1/register';
-const baseUrl = 'https://archiver-4de6.onrender.com/api/v1/register'
+import axios from 'axios';
+// const API_URL = process.env.RN_APP_API_URL + '/api/v1/register';
+
+import { API_URL } from './apiEnv';
+
+// const path = '/api/v1/register';
 
 export const getDocumentInfo = async (url) => {
-    return await fetch(url)
+    return await axios(url)
         .then(handleResponse)
         .catch(handleError);
 }
 
 export const getImgBySlug = async (slug) => {
-    return await fetch(baseUrl + "?slug=" + slug)
+    return await axios(API_URL + "?slug=" + slug)
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok.');
             return response.json().then(img => {
@@ -22,7 +26,7 @@ export const getImgBySlug = async (slug) => {
 }
 
 export const saveData = async (newUser) => {
-    return await fetch(baseUrl + (newUser.id || ''), {
+    return await axios(API_URL + (newUser.id || ''), {
         method: newUser.id? 'PUT' : 'POST',  //POST for create, 
         //PUT to update when id already exists.
         headers: {"content-type": "application/json"},
@@ -36,7 +40,7 @@ export const saveData = async (newUser) => {
 }
 
 export const deleteImg = async (imgId) => {
-    return await fetch(baseUrl + imgId, {method: 'DELETE'})
+    return await axios(API_URL + imgId, {method: 'DELETE'})
         .then(handleResponse)
         .catch(handleError);
 }

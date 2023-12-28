@@ -7,15 +7,18 @@ import { docTypeArr } from "../../data";
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { StudentContext } from "../../context/studContext";
+import { saveData } from "../../api/genApi";
 
 
 const SecondTestScore = ({navigation, route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
     
+    //To get sch id
     const [userForm, setUserForm] = useState({
         id: studentData.id,
-        name: studentData.name
+        name: studentData.name,
+        subId: '',
         // label: '',
         // value: '',
     })
@@ -26,9 +29,9 @@ const SecondTestScore = ({navigation, route}: any) => {
 
     const setReg = (valIdentifier: any, typedVal: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
-        setUserForm({...userForm, [valIdentifier]: typedVal})
+        setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
-        console.log('id', navigation.getParent())
+        console.log('id', selected)
 
     }
 
@@ -39,7 +42,7 @@ const SecondTestScore = ({navigation, route}: any) => {
             return setErrForRegInput(isInputValid(userForm).errObj);
          }
         //  '/api/v1/register'
-        // saveData(userForm);
+        saveData(userForm);
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -89,7 +92,7 @@ const SecondTestScore = ({navigation, route}: any) => {
                 data={docTypeArr}
                 labelField="label"
                 //label on valuefield was value b4. i changed to label
-                valueField="label"
+                valueField="id"
                 placeholder="Select item"
                 value={selected}
                 activeColor="#F7DBB6"
@@ -111,7 +114,9 @@ const SecondTestScore = ({navigation, route}: any) => {
                 renderItem={renderItem}
                 renderSelectedItem={(item, unselect) => (
                     <TouchableOpacity onPress={
-                      () => unselect && unselect(item)
+                      () => {
+                        unselect && unselect(item)
+                      }
                     }>
                         <View style={styles.selectedStyle}>
                             <Text style={styles.textSelectedStyle}>{item.label}</Text>
@@ -146,7 +151,7 @@ const SecondTestScore = ({navigation, route}: any) => {
                 }}>
                 <Button 
                     title="Submit"
-                    onPress={()=>{}}
+                    onPress={submitForm}
                 />
             </View>
         </SafeAreaView>

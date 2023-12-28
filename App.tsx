@@ -10,7 +10,7 @@ import LoginPage from './screens/login';
 import Dashboard from './screens/dashboard';
 import StudentList from './screens/studentList';
 import SchoolHead from './screens/schHeads';
-import ResultViewer from './screens/resultViewer';
+import ResultPreviewer from './screens/resultPreviewer';
 import ManageRegForm from './forms/manageRegForm';
 
 
@@ -29,7 +29,7 @@ export default function App() {
         <Screen name='studListForRes' component={StudentList} />
         <Screen name='studList' component={StudentList} />
         <Screen name='admin' component={SchoolHead} />
-        <Screen name='resultView' component={ResultViewer} />
+        <Screen name='resultPreview' component={ResultPreviewer} />
         <Screen name='studentReg' component={ManageRegForm} />
         
         <Screen name='editDrawer' 

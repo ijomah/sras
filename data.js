@@ -75,18 +75,18 @@
 //    }
 //  ]
 export const docTypeArr = [
-  {label: "English", value: 'd-fro1', id: 1},
-  {label: "Mathematics", value: 'd-bac2', id: 2},
-  {label: "Social Studies", value: 'd-sur3', id: 3},
-  {label: "Civic Education", value: 'd-rec4', id: 4},
-  {label: "Commerce", value: 'd-tit5', id: 5},
-  {label: "Chemistry", value: 'd-vet6', id: 6},
-  {label: "Business Studies", value: 'd-ele7', id: 7},
-  {label: "Home Economics", value: 'd-str8', id: 8},
-  {label: "Technical drawing", value: 'd-arc9', id: 9},
-  {label: "Mechanical drawing", value: 'd-mec10', id: 10},
-  {label: "Literature", value: 'd-app11', id: 11},
-  {label: "Biology", value: 'd-que12', id: 12}
+  {label: "English", value: 'd-fro1', id: '1'},
+  {label: "Mathematics", value: 'd-bac2', id: '2'},
+  {label: "Social Studies", value: 'd-sur3', id: '3'},
+  {label: "Civic Education", value: 'd-rec4', id: '4'},
+  {label: "Commerce", value: 'd-tit5', id: '5'},
+  {label: "Chemistry", value: 'd-vet6', id: '6'},
+  {label: "Business Studies", value: 'd-ele7', id: '7'},
+  {label: "Home Economics", value: 'd-str8', id: '8'},
+  {label: "Technical drawing", value: 'd-arc9', id: '9'},
+  {label: "Mechanical drawing", value: 'd-mec10', id: '10'},
+  {label: "Literature", value: 'd-app11', id: '11'},
+  {label: "Biology", value: 'd-que12', id: '12'}
 ]
 
 export const studentList =  [

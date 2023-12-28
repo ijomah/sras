@@ -38,5 +38,8 @@ const ResultEditDrawer = ({route}: any) => {
         </StudentContext.Provider>
     )
 }
-
+{/* <Button 
+                title='Preview'
+                onPress={navigation.navigate('resultPreview')}
+            /> */}
 export default ResultEditDrawer;

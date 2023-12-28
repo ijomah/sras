@@ -8,6 +8,7 @@ import DocumentType from "../../documentType";
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { StudentContext } from "../../context/studContext";
+import { saveData } from "../../api/genApi";
 
 const ExamScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
@@ -17,6 +18,7 @@ const ExamScore = ({route}: any) => {
       //pass schId here as well
         id: studentData.id,
         name: studentData.name,
+        subId: ''
         // label: '',
         // value: '',
     })
@@ -27,7 +29,7 @@ const ExamScore = ({route}: any) => {
 
     const setReg = (valIdentifier: any, typedVal: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
-        setUserForm({...userForm, [valIdentifier]: typedVal})
+        setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
         
     }
@@ -39,7 +41,7 @@ const ExamScore = ({route}: any) => {
             return setErrForRegInput(isInputValid(userForm).errObj);
          }
         //  '/api/v1/register'
-        // saveData(userForm);
+        saveData(userForm);
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -94,7 +96,7 @@ const ExamScore = ({route}: any) => {
                 data={docTypeArr}
                 labelField="label"
                 //label on valuefield was value b4. i changed to label
-                valueField="label"
+                valueField="id"
                 placeholder="Select item"
                 value={selected}
                 activeColor="#F7DBB6"
@@ -116,7 +118,9 @@ const ExamScore = ({route}: any) => {
                 renderItem={renderItem}
                 renderSelectedItem={(item, unselect) => (
                     <TouchableOpacity onPress={
-                      () => unselect && unselect(item)
+                      () => {
+                        unselect && unselect(item)
+                      }
                     }>
                         <View style={styles.selectedStyle}>
                             <Text style={styles.textSelectedStyle}>{item.label}</Text>
@@ -151,7 +155,7 @@ const ExamScore = ({route}: any) => {
                 }}>
                 <Button 
                     title="Submit"
-                    onPress={()=>{}}
+                    onPress={submitForm}
                 />
             </View>
         </SafeAreaView>

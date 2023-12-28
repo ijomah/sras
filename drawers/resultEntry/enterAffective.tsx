@@ -5,7 +5,7 @@ import Checkbox, { CheckboxEvent } from 'expo-checkbox';
 
 
 
-import { Alert, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
 
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
 import { StudentContext } from '../../context/studContext';
@@ -18,16 +18,15 @@ export default function AffectiveEntry(props: any) {
             indexPosition: ''
         }]);
   const [isChecked, setChecked] = useState(false);
-  const {tableHeadDet, tableBodyDet, route}  = props
-      if (tableHeadDet === undefined && tableBodyDet === undefined) {
-        const val = {
-            tableHead: ['Title', '1', '2', '3', '4', '5'],
-            widthArr: [200, 60, 60, 60, 60, 60]
-        }
+  const val = {
+    tableHead: ['Title', '1', '2', '3', '4', '5'],
+    widthArr: [200, 60, 60, 60, 60, 60]
+    }
         
-        const [tableVal, setTableVal] = useState(val);
-        const studentData = useContext(StudentContext);
-        let itm = `
+    const [tableVal, setTableVal] = useState(val);
+    const studentData = useContext(StudentContext);
+
+    let itm = `
             <Checkbox
                 style={styles.checkbox}
                 value={isChecked}
@@ -48,7 +47,7 @@ export default function AffectiveEntry(props: any) {
                 setAffetiveData(
                     // affectiveData.filter(t => t.indexPosition !== (biggerIndex+smallerIndex))
                     affectiveData.filter(t => t.indexPosition[0] !== biggerIndex.toString())
-                )       
+                );
                 // setAffetiveData([...affectiveData, studentMeta ]);
                     } else {
                         console.log('oneMeta.indexPosition[0]', biggerIndex, affectiveData)
@@ -166,6 +165,7 @@ export default function AffectiveEntry(props: any) {
 
             return (
             <View style={styles.container}>
+                
               <Text 
                 style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
               >
@@ -217,35 +217,7 @@ export default function AffectiveEntry(props: any) {
                 
             </View>
             )
-    } else {
-         
-            return (
-            <View style={styles.container}>
-                <ScrollView horizontal={true} >
-                <View>
-                    <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>
-                    <Row data={tableHeadDet.tableHead} widthArr={tableHeadDet.widthArr} style={styles.header} textStyle={styles.text}/>
-                    </Table>
-                    <ScrollView style={styles.dataWrapper}>
-                    <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-                        {
-                        tableBodyDet.tableData.map((rowData: any[], index: React.Key | null | undefined) => (
-                            <Row
-                            key={index}
-                            data={rowData}
-                            widthArr={tableBodyDet.widthArr}
-                            style={[styles.row, {backgroundColor: '#F7F6E7'}]}
-                            textStyle={styles.text}
-                            />
-                        ))
-                        }
-                    </Table>
-                    </ScrollView>
-                </View>
-                </ScrollView>
-            </View>
-            )
-    }
+    
 }
 
 

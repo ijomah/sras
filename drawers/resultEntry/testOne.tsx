@@ -7,13 +7,16 @@ import { docTypeArr } from "../../data";
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { StudentContext } from "../../context/studContext";
+import { saveData } from "../../api/genApi";
 const FirstTestScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
+    const [subId, setSubId] = useState('');
    
     const [userForm, setUserForm] = useState({
         id: studentData.id,
-        name: studentData.name
+        name: studentData.name,
+        subId: '',
         // label: '',
         // value: '',
     })
@@ -24,9 +27,9 @@ const FirstTestScore = ({route}: any) => {
 
     const setReg = (valIdentifier: any, typedVal: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
-        setUserForm({...userForm, [valIdentifier]: typedVal})
+        setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
-        console.log('param\'s id', route.params)  
+        console.log('param\'s id', selected, subId)  
     }
 
     const submitForm = async () => {
@@ -36,7 +39,7 @@ const FirstTestScore = ({route}: any) => {
             return setErrForRegInput(isInputValid(userForm).errObj);
          }
         //  '/api/v1/register'
-        // saveData(userForm);
+        saveData(userForm);
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -62,7 +65,7 @@ const FirstTestScore = ({route}: any) => {
             // console.log('phoneDbId', phoneDbId)
             // })
     }
-    
+
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
         
       return (
@@ -90,8 +93,7 @@ const FirstTestScore = ({route}: any) => {
                 iconStyle={styles.iconStyle}
                 data={docTypeArr}
                 labelField="label"
-                //label on valuefield was value b4. i changed to label
-                valueField="label"
+                valueField="id"
                 placeholder="Select item"
                 value={selected}
                 activeColor="#F7DBB6"
@@ -108,12 +110,15 @@ const FirstTestScore = ({route}: any) => {
                     // />
                     <></>
                 )}
-                onChangeText={(datum: any) => console.log("onchangeTxt:", datum) }
+                onChangeText={(item: any) => console.log("onchangeTxt:", item) }
                 onConfirmSelectItem={(datum: any) => console.log("onConfirmSelect", datum)}
                 renderItem={renderItem}
                 renderSelectedItem={(item, unselect) => (
                     <TouchableOpacity onPress={
-                      () => unselect && unselect(item)
+                      () => {
+                        setSubId(item.id)
+                        unselect && unselect(item)
+                      }
                     }>
                         <View style={styles.selectedStyle}>
                             <Text style={styles.textSelectedStyle}>{item.label}</Text>
@@ -148,7 +153,7 @@ const FirstTestScore = ({route}: any) => {
                 }}>
                 <Button 
                     title="Submit"
-                    onPress={()=>{}}
+                    onPress={submitForm}
                 />
             </View>
         </SafeAreaView>
