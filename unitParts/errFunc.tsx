@@ -1,6 +1,6 @@
 
-export const isInputValid = (formDataObj) => {
-    const inputErr = {};
+export const isInputValid = (formDataObj: any) => {
+    const inputErr: any = {};
 
     for (let ppt in formDataObj) {
         // console.log(ppt)

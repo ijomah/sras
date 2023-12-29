@@ -13,6 +13,7 @@ import { saveData } from "../../api/genApi";
 const ExamScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
+    const [editing, setEditing] = useState(false);
 
     const [userForm, setUserForm] = useState({
       //pass schId here as well
@@ -40,8 +41,8 @@ const ExamScore = ({route}: any) => {
 
             return setErrForRegInput(isInputValid(userForm).errObj);
          }
-        //  '/api/v1/register'
-        saveData(userForm);
+        //  '/api/v1/scores'
+        let resp = saveData(userForm, '/api/v1/scores');
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -68,6 +69,15 @@ const ExamScore = ({route}: any) => {
             // })
     }
     
+
+    const selectSubjFirst = () => {
+      if(selected.length === 0) {
+        Alert.alert('Subject Selection Alert!','Select subject first')
+        setEditing(true);
+      }
+      setTimeout(() => setEditing(false), 200);
+    }
+
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
       
       return (
@@ -138,14 +148,15 @@ const ExamScore = ({route}: any) => {
             }}>
                 <MyTextInput 
                     label="Enter Examination Score" 
-                    inputErr={undefined} 
+                    inputErr={errForRegInput} 
                     inputConfig={{
-                        multiline: false,
-                        textAlignVertical: 'top',
-                        numberOfLines: 6,
-                        maxLength: 2,
-                        keyboardType:"number-pad",
-                        onChangeText:setReg.bind(this, 'exam')
+                      multiline: false,
+                      readOnly: editing,
+                      textAlignVertical: 'top',
+                      onPressIn: () => selectSubjFirst(),
+                      maxLength: 2,
+                      keyboardType:"number-pad",
+                      onChangeText:setReg.bind(this, 'exam')
                     }} 
                 />
             </View>

@@ -6,14 +6,14 @@ import { API_URL } from './apiEnv';
 
 // const path = '/api/v1/register';
 
-export const getDocumentInfo = async (url) => {
-    return await axios(url)
+export const getDocumentInfo = async (path) => {
+    return await axios.get(API_URL + path)
         .then(handleResponse)
         .catch(handleError);
 }
 
-export const getImgBySlug = async (slug) => {
-    return await axios(API_URL + "?slug=" + slug)
+export const getImgBySlug = async (slug, path) => {
+    return await axios.get(API_URL + path + "?slug=" + slug)
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok.');
             return response.json().then(img => {
@@ -25,22 +25,23 @@ export const getImgBySlug = async (slug) => {
         .catch(handleError);
 }
 
-export const saveData = async (newUser) => {
-    return await axios(API_URL + (newUser.id || ''), {
+export const saveData = async (newData, path) => {
+    return await axios({
         method: newUser.id? 'PUT' : 'POST',  //POST for create, 
+        url: API_URL + path + '/' + (newData.id || ''),
         //PUT to update when id already exists.
-        headers: {"content-type": "application/json"},
-        body: JSON.stringify({
-            ...newUser,
-            newUserId: newUser.id 
-        })
+        // headers: {"content-type": "application/json"},
+        data: {
+            ...newData,
+            newDataId: newData.id 
+        }
     })
         .then(handleResponse)
         .catch(handleError);
 }
 
-export const deleteImg = async (imgId) => {
-    return await axios(API_URL + imgId, {method: 'DELETE'})
+export const deleteImg = async (path, imgId) => {
+    return await axios(API_URL + path + '/' + imgId, {method: 'DELETE'})
         .then(handleResponse)
         .catch(handleError);
 }

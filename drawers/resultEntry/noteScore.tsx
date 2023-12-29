@@ -23,6 +23,7 @@ const NoteScore = ({route}: any) => {
         // value: '',
     })
     const [errForRegInput, setErrForRegInput] = useState({});
+    const [editing, setEditing] = useState(false);
 
     // const dispatch = useDispatch();
     // const navigation = useNavigation();
@@ -41,8 +42,8 @@ const NoteScore = ({route}: any) => {
 
             return setErrForRegInput(isInputValid(userForm).errObj);
          }
-        //  '/api/v1/register'
-        saveData(userForm);
+       //  '/api/v1/scores'
+       let resp = saveData(userForm, '/api/v1/scores');
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -69,6 +70,13 @@ const NoteScore = ({route}: any) => {
             // })
     }
     
+    const selectSubjFirst = () => {
+      if(selected.length === 0) {
+        Alert.alert('Subject Selection Alert!','Select subject first')
+        setEditing(true);
+      }
+      setTimeout(() => setEditing(false), 200);
+    }
 
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
           
@@ -97,7 +105,6 @@ const NoteScore = ({route}: any) => {
                 iconStyle={styles.iconStyle}
                 data={docTypeArr}
                 labelField="label"
-                //label on valuefield was value b4. i changed to label
                 valueField="id"
                 placeholder="Select item"
                 value={selected}
@@ -143,8 +150,9 @@ const NoteScore = ({route}: any) => {
                     inputErr={undefined} 
                     inputConfig={{
                         multiline: false,
+                        readOnly: editing,
                         textAlignVertical: 'top',
-                        numberOfLines: 6,
+                        onPressIn: () => selectSubjFirst(),
                         maxLength: 2,
                         keyboardType:"phone-pad",
                         onChangeText:(val1: any)=>setReg('note', val1)

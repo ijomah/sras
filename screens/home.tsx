@@ -1,15 +1,35 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Button } from 'react-native';
 // import { readData, readApprAndApplicTable } from "../util/dbService";
-// import { Link } from 'expo-router'
+
+import { Dropdown } from 'react-native-element-dropdown';
+
+import AntDesign from '@expo/vector-icons/AntDesign';
+
+import { schList } from "../data";
+
+
 
 const HomePage = ({navigation}: any) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [isFocus, setIsFocus] = useState(false);
+    const [value, setValue] = useState('');
     // let isScannerBtn = false
     const handleSubmit = () => {
         console.log('Login submitted');
     }
+
+    const renderLabel = () => {
+        if (value || isFocus) {
+          return (
+            <Text style={[styles.label, isFocus && { color: 'blue' }]}>
+              Dropdown label
+            </Text>
+          );
+        }
+        return null;
+      };
     
     return (
         <View>
@@ -20,16 +40,39 @@ const HomePage = ({navigation}: any) => {
                         source={require('./../assets/laptopchild.jpeg')} 
                     />
                 
-                        <Button title="Login" onPress={()=>{{                            
-                            navigation.navigate('login')
-                        }
-                            }
-                        } />
-                </View>
-                <View >
-                    {/* <Image 
-                        style={styles.archivaLogo} 
-                        source={require('../../assets/notSplash.jpg')} /> */}
+                <View style={styles.container}>
+              {renderLabel()}
+              <Dropdown
+                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                inputSearchStyle={styles.inputSearchStyle}
+                iconStyle={styles.iconStyle}
+                data={schList}
+                search
+                maxHeight={300}
+                labelField="name"
+                valueField="name"
+                placeholder={!isFocus ? 'Select item' : '...'}
+                searchPlaceholder="Search..."
+                value={value}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                  setValue(item.value);
+                  setIsFocus(false);
+                  navigation.navigate('login')
+                }}
+                renderLeftIcon={() => (
+                  <AntDesign
+                    style={styles.icon}
+                    color={isFocus ? 'blue' : 'black'}
+                    name="Safety"
+                    size={20}
+                  />
+                )}
+              />
+            </View>
                 </View>
             </View>
         </View>
@@ -81,7 +124,48 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: 'skyblue',
         borderRadius: 20
-    }
+    },
+
+
+    //dropdown
+        container: {
+          backgroundColor: 'white',
+          padding: 16,
+        },
+        dropdown: {
+          height: 50,
+          borderColor: 'gray',
+          borderWidth: 0.5,
+          borderRadius: 8,
+          paddingHorizontal: 8,
+        },
+        icon: {
+          marginRight: 5,
+        },
+        label: {
+          position: 'absolute',
+          backgroundColor: 'white',
+          left: 22,
+          top: 8,
+          zIndex: 999,
+          paddingHorizontal: 8,
+          fontSize: 14,
+        },
+        placeholderStyle: {
+          fontSize: 16,
+        },
+        selectedTextStyle: {
+          fontSize: 16,
+        },
+        iconStyle: {
+          width: 20,
+          height: 20,
+        },
+        inputSearchStyle: {
+          height: 40,
+          fontSize: 16,
+        },
+    
 })
 
 export default HomePage

@@ -13,7 +13,7 @@ import { saveData } from "../../api/genApi";
 const SecondTestScore = ({navigation, route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
-    
+    const [editing, setEditing] = useState(false);
     //To get sch id
     const [userForm, setUserForm] = useState({
         id: studentData.id,
@@ -41,8 +41,8 @@ const SecondTestScore = ({navigation, route}: any) => {
 
             return setErrForRegInput(isInputValid(userForm).errObj);
          }
-        //  '/api/v1/register'
-        saveData(userForm);
+        //  '/api/v1/scores'
+        let resp = saveData(userForm, '/api/v1/scores');
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -69,6 +69,14 @@ const SecondTestScore = ({navigation, route}: any) => {
             // })
     }
     
+    const selectSubjFirst = () => {
+      if(selected.length === 0) {
+        Alert.alert('Subject Selection Alert!','Select subject first')
+        setEditing(true);
+      }
+      setTimeout(() => setEditing(false), 200);
+    }
+
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
       
       return (
@@ -137,8 +145,9 @@ const SecondTestScore = ({navigation, route}: any) => {
                     inputErr={undefined} 
                     inputConfig={{
                         multiline: false,
+                        readOnly: editing,
                         textAlignVertical: 'top',
-                        numberOfLines: 6,
+                        onPressIn: () => selectSubjFirst(),
                         maxLength: 2,
                         keyboardType:"number-pad",
                         onChangeText:setReg.bind(this, 'test2')

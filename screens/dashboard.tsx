@@ -4,8 +4,8 @@ import { Button, StyleSheet, FlatList, SafeAreaView, Image, TouchableOpacity, Vi
 const Dashboard = ({navigation}: any) => {
     // const blurhash ='|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
     const itms = [
-        {id: 1, do: 'studListForRes', title: "Enter Result"},
-        {id: 2, do: 'viewDrawer', title: "View Result"},
+        {id: 1, do: 'studListForRes', title: "Enter Result", pathName: 'editDrawer'},
+        {id: 2, do: 'studList', title: "View Result", pathName: 'viewDrawer'},
         {id: 3, do: 'studentReg', title: "Register student"},
         {id: 4, do: 'admin', title: "Admin Section"}
     ]
@@ -26,7 +26,7 @@ const Dashboard = ({navigation}: any) => {
                 {/* <Text>{item.title}</Text> */}
                 <Button 
                     title={item.title}
-                    onPress={() => navigation.navigate(item.do)}
+                    onPress={() => navigation.navigate(item.do, {pathName: item.pathName})}
                 />
             </View>
         )

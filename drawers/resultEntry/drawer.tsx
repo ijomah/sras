@@ -20,7 +20,10 @@ const ResultEditDrawer = ({route}: any) => {
     console.log('params id', route.key) 
     const [studValue, setStudValue] = useState({
         name: route.params.name,
-        id:route.params.id
+        id:route.params.id,
+        schId: route.params.schId,
+        schHeadId: route.params.schHeadId,
+        teacherId: route.params.teacherId
     })
     
 

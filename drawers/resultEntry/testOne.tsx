@@ -12,7 +12,8 @@ const FirstTestScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
     const [subId, setSubId] = useState('');
-   
+    const [editing, setEditing] = useState(false);
+
     const [userForm, setUserForm] = useState({
         id: studentData.id,
         name: studentData.name,
@@ -38,8 +39,8 @@ const FirstTestScore = ({route}: any) => {
 
             return setErrForRegInput(isInputValid(userForm).errObj);
          }
-        //  '/api/v1/register'
-        saveData(userForm);
+        //  '/api/v1/scores'
+        let resp = saveData(userForm, '/api/v1/scores');
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -64,6 +65,14 @@ const FirstTestScore = ({route}: any) => {
             //    let phoneDbId = dat.rows._array[0].dbUser_id
             // console.log('phoneDbId', phoneDbId)
             // })
+    }
+
+    const selectSubjFirst = () => {
+      if(selected.length === 0) {
+        Alert.alert('Subject Selection Alert!','Select subject first')
+        setEditing(true);
+      }
+      setTimeout(() => setEditing(false), 200);
     }
 
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
@@ -139,8 +148,9 @@ const FirstTestScore = ({route}: any) => {
                     inputErr={undefined} 
                     inputConfig={{
                         multiline: false,
+                        readOnly: editing,
                         textAlignVertical: 'top',
-                        numberOfLines: 6,
+                        onPressIn: () => selectSubjFirst(),
                         maxLength: 2,
                         keyboardType:'number-pad',
                         onChangeText:setReg.bind(this, 'test1')

@@ -100,6 +100,17 @@ export const studentList =  [
   { name: 'Student 8', value: '8' },
 ];
 
+export const schList =  [
+  { name: 'Sch 1', value: '1' },
+  { name: 'Sch 2', value: '2' },
+  { name: 'Sch 3', value: '3' },
+  { name: 'Sch 4', value: '4' },
+  { name: 'Sch 5', value: '5' },
+  { name: 'Sch 6', value: '6' },
+  { name: 'Sch 7', value: '7' },
+  { name: 'Sch 8', value: '8' },
+];
+
 export const places = [{
     id: 0,
     imgName: 'Survey plan',

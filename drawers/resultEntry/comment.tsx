@@ -7,9 +7,12 @@ import { StudentContext } from "../../context/studContext";
 
 export default function CommentPart(this: any, {getId}: any) {
     const studentData = useContext(StudentContext);
+    
+
     const [userForm, setUserForm] = useState({
         id: studentData.id,
         name: studentData.name,
+        teacherId: studentData.teacherId,
         // label: '',
         // value: '',
     })
