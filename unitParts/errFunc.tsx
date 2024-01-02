@@ -9,6 +9,7 @@ export const isInputValid = (formDataObj: any) => {
         if(!formDataObj[ppt]) {
              inputErr[ppt] = 'This is required';
                     //formObj[ppt] + ' '  + 'is required';
+                    // console.log('jop', inputErr)
         }
     }
     // setErrForInput(inputErr);

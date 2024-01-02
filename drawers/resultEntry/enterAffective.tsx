@@ -3,19 +3,19 @@ import React, {useState, useContext} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox, { CheckboxEvent } from 'expo-checkbox';
 
-
-
 import { Alert, Button, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
 
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
 import { StudentContext } from '../../context/studContext';
+import { saveData } from '../../api/genApi';
 
 export default function AffectiveEntry(props: any) {
-  const [affectiveData, setAffetiveData] = useState([{
-            id: '0', 
-            name: '', 
+    const studentData = useContext(StudentContext);
+  const [affectiveData, setAffetiveData] = useState([{ 
             title: '',
-            indexPosition: ''
+            indexPosition: '',
+            schId: studentData.schId,
+            studId: studentData.id 
         }]);
   const [isChecked, setChecked] = useState(false);
   const val = {
@@ -24,7 +24,6 @@ export default function AffectiveEntry(props: any) {
     }
         
     const [tableVal, setTableVal] = useState(val);
-    const studentData = useContext(StudentContext);
 
     let itm = `
             <Checkbox
@@ -38,25 +37,29 @@ export default function AffectiveEntry(props: any) {
             />`;
 
     function _alertIndex( data: any, biggerIndex: any, smallerIndex: any, title: any) {
-                let studentMeta = Object.assign({}, studentData, {title:title, indexPosition: biggerIndex.toString()+smallerIndex.toString()})
+        let studentMeta = {
+                studId: studentData.id,
+                schId: studentData.schId,
+                title: title, 
+                indexPosition: biggerIndex.toString()+smallerIndex.toString()
+            }
         affectiveData.forEach((oneMeta) => {
             if(oneMeta.indexPosition[0] === biggerIndex.toString()) {
-                 let oneMetaIdx = affectiveData.indexOf(oneMeta);
+                let oneMetaIdx = affectiveData.indexOf(oneMeta);
                  
-                        Alert.alert('You Picked duplicate value on the same title');
+                Alert.alert('You Picked duplicate value on the same title');
                 setAffetiveData(
                     // affectiveData.filter(t => t.indexPosition !== (biggerIndex+smallerIndex))
                     affectiveData.filter(t => t.indexPosition[0] !== biggerIndex.toString())
                 );
                 // setAffetiveData([...affectiveData, studentMeta ]);
-                    } else {
-                        console.log('oneMeta.indexPosition[0]', biggerIndex, affectiveData)
+            } else {
+                console.log('oneMeta.indexPosition[0]', biggerIndex, affectiveData)
                         
-                        setAffetiveData([...affectiveData, studentMeta ]);
-                        ToastAndroid.show(`You Picked ${data} from ${title}`, ToastAndroid.SHORT)
-                    }
-
-                })
+                setAffetiveData([...affectiveData, studentMeta ]);
+                ToastAndroid.show(`You Picked ${data} from ${title}`, ToastAndroid.SHORT)
+            }
+        })
         //   setAffetiveData(
         //                     // affectiveData.filter(t => t.indexPosition !== (biggerIndex+smallerIndex))
         //                     affectiveData.filter(t => t.indexPosition[0] !== biggerIndex.toString())
@@ -103,13 +106,13 @@ export default function AffectiveEntry(props: any) {
         //inform the user if duplicate exists
         //accept changes
         //save to state.
-        let studentMeta: object = Object.assign({}, 
-            studentData,
-            {
+        let studentMeta: object = {
+                studId: studentData.id,
+                schId: studentData.schId,
                 title: title, 
                 indexPosition: idxI.toString()+idxJ.toString()
             }
-        )
+
         arrForWork.push(studentMeta);
         console.log('purge', idxI, affectiveData);
         arrForWork.forEach((checkDatum) =>{
@@ -117,13 +120,12 @@ export default function AffectiveEntry(props: any) {
                 Alert.alert(
                     `You Picked duplicate value on the same title, 
                     we\'ve replaced the former`);
-                let studentOneMeta = Object.assign({}, 
-                        studentData,
-                        {
-                            title: title, 
-                            indexPosition: idxI.toString()+idxJ.toString()
-                        }
-                    )
+                let studentOneMeta = {
+                    studId: studentData.id,
+                    schId: studentData.schId,
+                    title: title, 
+                    indexPosition: idxI.toString()+idxJ.toString()
+                }
                 arrForWork.splice(arrForWork.indexOf(checkDatum), 1, studentOneMeta);
 
             }
@@ -142,10 +144,17 @@ export default function AffectiveEntry(props: any) {
     }
             // const element = (data: any, bigIndex: any, smallIndex: any, title: any) => {
             const element = (...para: any) => {
-                // console.log(para[0], para[1], para[2], para[3]);
+                // console.log(typeof(para[0]), para[1], para[2], para[3]);
                 return (
                     <TouchableOpacity 
-                        onPress={() => {_alertIndex(para[0], para[1], para[2], para[3])}}
+                        onPress={() => {
+                            _alertIndex(
+                                para[0], 
+                                para[1], 
+                                para[2], 
+                                para[3]
+                            )
+                        }}
                         // onPress={() => {_alertIndex(data, bigIndex, smallIndex, title)}}
                     >
                     {/* <View style={styles.section}>
@@ -155,68 +164,83 @@ export default function AffectiveEntry(props: any) {
                         <Text 
                             style={styles.btnText}
                         >
-                            PRESS
+                            {'0'+para[0]}
                         </Text>
                     </View>
                     </TouchableOpacity>
                 )
             }
 
+    const submitIt = async () => {
+        Alert.alert('Uploading! ...');
+        // ToastAndroid.show('Uploading! ...', ToastAndroid.LONG)
+        const apiResp = await saveData(affectiveData, 'api/v1/affective');
+        console.log('affect api res', apiResp);
+    }
 
-            return (
-            <View style={styles.container}>
-                
-              <Text 
+    return (
+        <View style={styles.container}>
+            
+            <Text 
                 style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
-              >
+            >
                 AFFECTIVE DOMAIN
-              </Text>
-                        <ScrollView horizontal={true} >
-                        <View>
-                            <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>
-                            <Row 
-                                data={state.tableHead} 
-                                widthArr={state.widthArr} 
-                                style={styles.header} 
-                                textStyle={styles.text}
-                            />
-                            </Table>
-                            <ScrollView style={styles.dataWrapper}>
-                            <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-                                {
-                                //filterTableVal.length === 0? setfilteredTableArr(tableData)
-                                    //  if (filterTableVal.length === 0) 
-                                    //     setfilteredTableArr(tableData)
-                                    // filteredTableArr
-                                    tableData.map((rowData, index) => (
-                                        <TableWrapper key={index} style={styles.tableWrapperRow}>
-                                            {
-                                                rowData.map((cellData: any, cellIndex: any) => (
-                                                    <Cell 
-                                                        width={state.widthArr[cellIndex]} 
-                                                        //height={20} 
-                                                        flex={1} 
-                                                        key={cellIndex} 
-                                                        data={
-                                                            cellIndex > 0? 
-                                                                    element(cellData, index, cellIndex, rowData[0]) 
-                                                                :   cellData
-                                                        } 
-                                                        textStyle={styles.text} 
-                                                    />
-                                                ))
-                                            }
-                                        </TableWrapper>
-                                    ))
-                                        
-                                }
-                            </Table>
-                            </ScrollView>
-                        </View>
-                        </ScrollView>
-                
+            </Text>
+            <ScrollView horizontal={true} >
+                <View>
+                    <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>
+                        <Row 
+                            data={state.tableHead} 
+                            widthArr={state.widthArr} 
+                            style={styles.header} 
+                            textStyle={styles.text}
+                        />
+                    </Table>
+                    <ScrollView style={styles.dataWrapper}>
+                        <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
+                            {
+                            //filterTableVal.length === 0? setfilteredTableArr(tableData)
+                                //  if (filterTableVal.length === 0) 
+                                //     setfilteredTableArr(tableData)
+                                // filteredTableArr
+                                tableData.map((rowData, index) => (
+                                    <TableWrapper key={index} style={styles.tableWrapperRow}>
+                                        {
+                                            rowData.map((cellData: any, cellIndex: any) => (
+                                                <Cell 
+                                                    width={state.widthArr[cellIndex]} 
+                                                    //height={20} 
+                                                    flex={1} 
+                                                    key={cellIndex} 
+                                                    data={
+                                                        cellIndex > 0? 
+                                                                element(cellData, index, cellIndex, rowData[0]) 
+                                                            :   cellData
+                                                    } 
+                                                    textStyle={styles.text} 
+                                                />
+                                            ))
+                                        }
+                                    </TableWrapper>
+                                ))
+                                    
+                            }
+                        </Table>
+                    </ScrollView>
+                </View>
+            </ScrollView>
+            <View 
+                style={{
+                    marginTop:20,
+                }}>
+                <Button 
+                    title="Submit"
+                    onPress={submitIt}
+                    // disabled={errForRegInput}
+                />
             </View>
-            )
+        </View>
+    )
     
 }
 

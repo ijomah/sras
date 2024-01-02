@@ -14,6 +14,7 @@ const ExamScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
     const [editing, setEditing] = useState(false);
+    const [inputText, setInputText] = useState()
 
     const [userForm, setUserForm] = useState({
       //pass schId here as well
@@ -23,7 +24,7 @@ const ExamScore = ({route}: any) => {
         // label: '',
         // value: '',
     })
-    const [errForRegInput, setErrForRegInput] = useState({});
+    const [errForRegInput, setErrForRegInput] = useState(true);
 
     // const dispatch = useDispatch();
     // const navigation = useNavigation();
@@ -32,7 +33,7 @@ const ExamScore = ({route}: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
         setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
-        
+        setErrForRegInput(false);
     }
 
     const submitForm = async () => {
@@ -156,7 +157,12 @@ const ExamScore = ({route}: any) => {
                       onPressIn: () => selectSubjFirst(),
                       maxLength: 2,
                       keyboardType:"number-pad",
-                      onChangeText:setReg.bind(this, 'exam')
+                      value: inputText,
+                      onChangeText:setReg.bind(this, 'exam'),
+                      onEndEditing: () => {
+                        submitForm()
+                        setSelected([])
+                      }
                     }} 
                 />
             </View>
@@ -164,10 +170,11 @@ const ExamScore = ({route}: any) => {
                 style={{
                     marginTop:78,
                 }}>
-                <Button 
+                {/* <Button 
                     title="Submit"
                     onPress={submitForm}
-                />
+                    disabled={errForRegInput}
+                /> */}
             </View>
         </SafeAreaView>
     )

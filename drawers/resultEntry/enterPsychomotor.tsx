@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
 import { StudentContext } from '../../context/studContext';
+import { saveData } from '../../api/genApi';
 
 export default function PsychomotorEntry(props: any) {
     
@@ -17,7 +18,7 @@ export default function PsychomotorEntry(props: any) {
             const studentData = useContext(StudentContext);
                 
             function _alertIndex( data: any, biggerIndex: any, smallerIndex: any, title: any) {
-                Alert.alert(`You Picked ${data} ${biggerIndex}`);
+                Alert.alert(`You Picked ${data}`);
                 //What if   the user picks two btns on the same row
                 //What if the user wants to change the value picked by picking 
                 //another on the same row
@@ -45,7 +46,7 @@ export default function PsychomotorEntry(props: any) {
               }
 
               const element = (...para: any) => {
-                console.log(para[0], para[1], para[2], para[3]);
+                // console.log(para[0], para[1], para[2], para[3]);
                 return (
                     <TouchableOpacity 
                         onPress={() => {_alertIndex(para[0], para[1], para[2], para[3])}}
@@ -64,13 +65,18 @@ export default function PsychomotorEntry(props: any) {
                         <Text 
                             style={styles.btnText}
                         >
-                            PRESS
+                            {'0'+para[0]}
                         </Text>
                     </View>
                     </TouchableOpacity>
                 )
             }
-
+            const submitIt = async () => {
+                Alert.alert('Uploading! ...');
+                // ToastAndroid.show('Uploading! ...', ToastAndroid.LONG)
+                const apiResp = await saveData(affectiveData, 'api/v1/psychomotive');
+                console.log('psycho api res', apiResp);
+            }
 
             return (
             <View style={styles.container}>
@@ -128,7 +134,16 @@ export default function PsychomotorEntry(props: any) {
                             </ScrollView>
                         </View>
                         </ScrollView>
-                
+                        <View 
+                            style={{
+                                marginTop:20,
+                            }}>
+                            <Button 
+                                title="Submit"
+                                onPress={submitIt}
+                                // disabled={errForRegInput}
+                            />
+                        </View>
             </View>
             )
     } else {

@@ -14,6 +14,7 @@ import { saveData } from "../../api/genApi";
 const NoteScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
+    const [inputText, setInputText] = useState()
 
     const [userForm, setUserForm] = useState({
         id: studentData.id,
@@ -22,7 +23,7 @@ const NoteScore = ({route}: any) => {
         // label: '',
         // value: '',
     })
-    const [errForRegInput, setErrForRegInput] = useState({});
+    const [errForRegInput, setErrForRegInput] = useState(true);
     const [editing, setEditing] = useState(false);
 
     // const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const NoteScore = ({route}: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
         setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
+        setErrForRegInput(false);
     
     }
 
@@ -155,8 +157,12 @@ const NoteScore = ({route}: any) => {
                         onPressIn: () => selectSubjFirst(),
                         maxLength: 2,
                         keyboardType:"phone-pad",
-                        onChangeText:(val1: any)=>setReg('note', val1)
-                        // onChangeText:setReg.bind(this, 'note')
+                        value: inputText,
+                        onChangeText:(val1: any)=>setReg('note', val1),
+                        onEndEditing: () => {
+                          submitForm()
+                          setSelected([])
+                        }
                     }} 
                 />
             </View>
@@ -164,10 +170,11 @@ const NoteScore = ({route}: any) => {
                 style={{
                     marginTop:78,
                 }}>
-                <Button 
+                {/* <Button 
                     title="Submit"
                     onPress={submitForm}
-                />
+                    disabled={errForRegInput}
+                /> */}
             </View>
         </SafeAreaView>
     )

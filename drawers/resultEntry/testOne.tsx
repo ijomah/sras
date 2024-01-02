@@ -13,6 +13,7 @@ const FirstTestScore = ({route}: any) => {
     const studentData = useContext(StudentContext);
     const [subId, setSubId] = useState('');
     const [editing, setEditing] = useState(false);
+    const [inputText, setInputText] = useState()
 
     const [userForm, setUserForm] = useState({
         id: studentData.id,
@@ -21,7 +22,7 @@ const FirstTestScore = ({route}: any) => {
         // label: '',
         // value: '',
     })
-    const [errForRegInput, setErrForRegInput] = useState({});
+    const [errForRegInput, setErrForRegInput] = useState(true);
 
     // const dispatch = useDispatch();
     // const navigation = useNavigation();
@@ -30,17 +31,20 @@ const FirstTestScore = ({route}: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
         setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
-        console.log('param\'s id', selected, subId)  
+        console.log('param\'s id', selected, subId)
+        setErrForRegInput(false);
     }
 
     const submitForm = async () => {
         // await storeData(userForm);
-        if(!isInputValid(userForm).isErr) {
 
-            return setErrForRegInput(isInputValid(userForm).errObj);
+        if(!isInputValid(userForm).isErr) {
+          console.log('i am')
+            return setErrForRegInput(!isInputValid(userForm).isErr);
          }
         //  '/api/v1/scores'
         let resp = saveData(userForm, '/api/v1/scores');
+        // console.log('err', errForRegInput)
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -145,7 +149,7 @@ const FirstTestScore = ({route}: any) => {
             }}>
                 <MyTextInput 
                     label="Enter First Test Score" 
-                    inputErr={undefined} 
+                    inputErr={errForRegInput} 
                     inputConfig={{
                         multiline: false,
                         readOnly: editing,
@@ -153,7 +157,11 @@ const FirstTestScore = ({route}: any) => {
                         onPressIn: () => selectSubjFirst(),
                         maxLength: 2,
                         keyboardType:'number-pad',
-                        onChangeText:setReg.bind(this, 'test1')
+                        onChangeText:setReg.bind(this, 'test1'),
+                        onEndEditing: () => {
+                          submitForm()
+                          setSelected([])
+                        }
                     }} 
                 />
             </View>
@@ -164,6 +172,7 @@ const FirstTestScore = ({route}: any) => {
                 <Button 
                     title="Submit"
                     onPress={submitForm}
+                    disabled={errForRegInput}
                 />
             </View>
         </SafeAreaView>

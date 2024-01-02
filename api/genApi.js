@@ -27,7 +27,7 @@ export const getImgBySlug = async (slug, path) => {
 
 export const saveData = async (newData, path) => {
     return await axios({
-        method: newUser.id? 'PUT' : 'POST',  //POST for create, 
+        method: newData.id? 'PUT' : 'POST',  //POST for create, 
         url: API_URL + path + '/' + (newData.id || ''),
         //PUT to update when id already exists.
         // headers: {"content-type": "application/json"},

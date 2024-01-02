@@ -14,15 +14,17 @@ const SecondTestScore = ({navigation, route}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
     const [editing, setEditing] = useState(false);
+    const [inputText, setInputText] = useState()
     //To get sch id
     const [userForm, setUserForm] = useState({
         id: studentData.id,
         name: studentData.name,
         subId: '',
+        test2: ''
         // label: '',
         // value: '',
     })
-    const [errForRegInput, setErrForRegInput] = useState({});
+    const [errForRegInput, setErrForRegInput] = useState(true);
 
     // const dispatch = useDispatch();
     // const navigation = useNavigation();
@@ -31,7 +33,7 @@ const SecondTestScore = ({navigation, route}: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
         setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
-        console.log('id', selected)
+        setErrForRegInput(false)
 
     }
 
@@ -43,6 +45,10 @@ const SecondTestScore = ({navigation, route}: any) => {
          }
         //  '/api/v1/scores'
         let resp = saveData(userForm, '/api/v1/scores');
+
+        // setSelected([]);
+        // setInputText('');
+        // setUserForm({})
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -150,7 +156,12 @@ const SecondTestScore = ({navigation, route}: any) => {
                         onPressIn: () => selectSubjFirst(),
                         maxLength: 2,
                         keyboardType:"number-pad",
-                        onChangeText:setReg.bind(this, 'test2')
+                        value: inputText,
+                        onChangeText:setReg.bind(this, 'test2'),
+                        onEndEditing: () => {
+                          submitForm()
+                          setSelected([])
+                        }
                     }} 
                 />
             </View>
@@ -161,6 +172,7 @@ const SecondTestScore = ({navigation, route}: any) => {
                 <Button 
                     title="Submit"
                     onPress={submitForm}
+                    disabled={errForRegInput}
                 />
             </View>
         </SafeAreaView>

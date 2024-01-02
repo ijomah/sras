@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -32,6 +32,7 @@ export default function CognitPage(props: any) {
                     <Text
                       style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
                     >CONGITIVE DOMAIN</Text>
+                    <ActivityIndicator size={'large'} />
                       <ScrollView horizontal={true} >
                       <View>
                           <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>

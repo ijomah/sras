@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import { Table, TableWrapper, Row } from 'react-native-reanimated-table';
 
 import { AntDesign } from '@expo/vector-icons';
@@ -54,6 +54,7 @@ export default function AffectPage(props: any) {
               <Text
                 style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
               >AFFECTIVE DOMAIN</Text>
+              <ActivityIndicator size={'large'} />
                 <ScrollView horizontal={true} >
                 <View>
                     <Table borderStyle={{borderWidth: 1, borderColor: 'lightyellow'}}>

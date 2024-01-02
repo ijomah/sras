@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, StyleSheet, Text, SafeAreaView, Button, TextInput, TouchableOpacity } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const MyTextInput = ({label, inputErr, inputConfig}: any) => {
-    // console.log('from custom input', inputConfig)
-
+    // console.log('from custom input', inputErr)
+// const input = useRef(null)
+let textInput: any
     return (
         // <View>
         //     <Text>{label}</Text>
@@ -18,22 +19,25 @@ const MyTextInput = ({label, inputErr, inputConfig}: any) => {
                         <TextInput {...inputConfig}
                             style={[ inputConfig.multiline? styles.multinput: styles.input ]}
                             // placeholder="joe@mail.com"
+                            ref={input => {textInput = input}}
+                            onSubmitEditing={() => textInput.clear()}
                             // value={email}
                             // onChangeText={handleChangeEmail} 
                             // //autoComplete=""
                             // cursorColor='#FFEDD6'
                         />
                     </View>
-                    {inputErr === undefined? '' :
+                    
+                    {inputErr? '' :
                         <TouchableOpacity style={{justifyContent: 'center',}}>
-                            {inputErr && 
+                            {/* {inputErr ||  */}
                                 <MaterialIcons 
                                     name="error-outline" 
-                                    size={32} 
+                                    size={22} 
                                     color="red" 
                                     style={{marginTop: 20}}
                                 />   
-                            }
+                            {/* } */}
                             {/* {!inputErr &&
                                 <MaterialCommunityIcons 
                                     name="checkbox-marked-circle-outline" 

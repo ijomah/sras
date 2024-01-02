@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Alert, Image, TouchableOpacity, TextInputCompon
 function LoginPage({navigation}: any) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(true);
 
     const handleChangeEmail = (typedEmail: any) => {
         setEmail(typedEmail)
@@ -44,6 +45,7 @@ function LoginPage({navigation}: any) {
                     <TextInput
                         style={styles.input}
                         placeholder="joe@mail.com"
+                        autoCapitalize="none"
                         value={email}
                         onChangeText={handleChangeEmail} 
                         //autoComplete=""
@@ -52,17 +54,19 @@ function LoginPage({navigation}: any) {
                 </View>
                 <View style={styles.loginPassword}>
                     <Text style={styles.loginTxt}>Password:</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Password"
-                        secureTextEntry={true}
-                        value={password}
-                        keyboardType="visible-password"
-                        onChangeText={handleChangePassword}
-                        cursorColor='#FFEDD6'
-                        // secureTextEntry= 'true'
-                        //autoComplete="true"
-                    />
+                    <View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            secureTextEntry={showPassword}
+                            value={password}
+                            autoCapitalize="none"
+                            keyboardType="visible-password"
+                            onChangeText={handleChangePassword}
+                            cursorColor='#FFEDD6'
+                        />
+                        {/* bring eye icon and blind icon with conditional */}
+                    </View>
                 </View>
                 <View style={styles.loginBtn}>
                     <TouchableOpacity>

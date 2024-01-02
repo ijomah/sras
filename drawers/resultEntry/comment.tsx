@@ -5,9 +5,9 @@ import { isInputValid } from "../../unitParts/errFunc";
 import { useState } from "react";
 import { StudentContext } from "../../context/studContext";
 
-export default function CommentPart(this: any, {getId}: any) {
+export default function CommentPart(this: any) {
     const studentData = useContext(StudentContext);
-    
+    const [inputText, setInputText] = useState('')
 
     const [userForm, setUserForm] = useState({
         id: studentData.id,
@@ -16,7 +16,7 @@ export default function CommentPart(this: any, {getId}: any) {
         // label: '',
         // value: '',
     })
-    const [errForRegInput, setErrForRegInput] = useState({});
+    const [errForRegInput, setErrForRegInput] = useState(true);
 
     // const dispatch = useDispatch();
     // const navigation = useNavigation();
@@ -26,6 +26,7 @@ export default function CommentPart(this: any, {getId}: any) {
         // console.log('identifier-val', valIdentifier, typedVal)
         setUserForm({...userForm, [valIdentifier]: typedVal}) 
         console.log('state part', userForm)
+        setErrForRegInput(false)
         
     }
 
@@ -38,6 +39,7 @@ export default function CommentPart(this: any, {getId}: any) {
         //  }
         //  '/api/v1/register'
         // saveData(userForm);
+        setInputText('')
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -77,6 +79,7 @@ export default function CommentPart(this: any, {getId}: any) {
                         numberOfLines: 6,
                         rows: 6,
                         keyboardType:"default",
+                        value: inputText,
                         onChangeText:setReg.bind(this, 'comment')
                     }} 
               />
@@ -89,6 +92,7 @@ export default function CommentPart(this: any, {getId}: any) {
                 <Button 
                     title="Submit"
                     onPress={submitForm}
+                    disabled={errForRegInput}
                 />
             </View>
         </SafeAreaView>
