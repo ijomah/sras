@@ -18,7 +18,7 @@ const Dashboard = ({navigation}: any) => {
                     style={{
                         backgroundColor: 'skyblue', 
                         marginTop: 10,
-                        height: 200, 
+                        height: 150,
                         width: 300}} 
                     source={require('../assets/dashIcon.jpeg')}
                     resizeMethod="scale"
@@ -26,6 +26,7 @@ const Dashboard = ({navigation}: any) => {
                 {/* <Text>{item.title}</Text> */}
                 <Button 
                     title={item.title}
+                    color={'#56DB32'}
                     onPress={() => navigation.navigate(item.do, {pathName: item.pathName})}
                 />
             </View>

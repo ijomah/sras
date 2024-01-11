@@ -92,6 +92,17 @@ const RegForm = ({onShowDate, date, setReg, submitForm, errInData}: any) => {
                         }}
                     />
                 </View>
+                <View style={styles.appliName}>
+                    <MyTextInput 
+                        label="School name:" 
+                        inputErr={errInData.lname}
+                        inputConfig={{
+                            secureTextEntry: true,
+                            placeholder:"Name of school",
+                            onChangeText:setReg.bind(this, 'schName')
+                        }}
+                    />
+                </View>
 
                 <View 
                     // style={styles.appliName}

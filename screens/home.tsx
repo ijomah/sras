@@ -35,10 +35,10 @@ const HomePage = ({navigation}: any) => {
         <View>
             <View style={styles.home}>                
                 <View style={styles.vendorLogoContainer}>
-                   <Image
+                   {/* <Image
                         style={styles.vendorLogo} 
                         source={require('./../assets/laptopchild.jpeg')} 
-                    />
+                    /> */}
                 
                 <View style={styles.container}>
               {renderLabel()}
@@ -53,7 +53,7 @@ const HomePage = ({navigation}: any) => {
                 maxHeight={300}
                 labelField="name"
                 valueField="name"
-                placeholder={!isFocus ? 'Select item' : '...'}
+                placeholder={!isFocus ? 'Select School' : '...'}
                 searchPlaceholder="Search..."
                 value={value}
                 onFocus={() => setIsFocus(true)}
@@ -129,13 +129,13 @@ const styles = StyleSheet.create({
 
     //dropdown
         container: {
-          backgroundColor: 'white',
+          backgroundColor: '#56DB32', //green
           padding: 16,
         },
         dropdown: {
           height: 50,
-          borderColor: 'gray',
-          borderWidth: 0.5,
+          borderColor: '#DB6D32',  //golden
+          borderWidth: 1,
           borderRadius: 8,
           paddingHorizontal: 8,
         },

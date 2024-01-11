@@ -53,8 +53,10 @@ const StudentList = ({navigation, route}: any) => {
     return (
         <FlatList 
             style={styles.studentNameStyle}
+            contentContainerStyle={{alignItems: 'center'}}
             data={studentListFromSlice}
             renderItem={showStudList}
+            numColumns={2}
         />
     )
 }
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center', 
         marginTop: 10,
         height: 100, 
-        width: 260
+        width: '95%',
     },
 
     pressable: {
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'flex-end',
         borderRadius: 14,
-        width: 250,
+        width: '46%',
         height: 100,
         margin: 5,
         backgroundColor: 'white',
@@ -92,8 +94,8 @@ const styles = StyleSheet.create({
         shadowRadius: 1.41,
   
         elevation: 2,
-        borderColor: '#5C8FAB',
-        borderWidth: 2
+        borderColor: '#DB6D32',
+        borderWidth: 1
     },
 
 

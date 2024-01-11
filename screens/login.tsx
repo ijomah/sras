@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Alert, Image, TouchableOpacity, TextInputComponent, TextInput, Button } from 'react-native';
 
+import { Entypo } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 function LoginPage({navigation}: any) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(true);
+    const [hideShow, setHideShow] = useState(true);
 
     const handleChangeEmail = (typedEmail: any) => {
         setEmail(typedEmail)
@@ -29,81 +31,79 @@ function LoginPage({navigation}: any) {
             navigation.navigate('dash');
         }    
     }
+
+    const toggleShowPassword = () => { 
+        setHideShow(!hideShow); 
+    }; 
     return (
         <View style={styles.loginBox}>
-            <View style={styles.loginForm}>
-                <Text style={styles.loginHeadTxt}>
-                    Login Form
-                    {/* <FontAwesomeIcon 
-                        icon="fa-solid fa-right-to-bracket" 
-                        size={20}
-                        style={styles.loginIcon}
-                    /> */}
-                </Text>
-                <View style={styles.loginEmail}>
-                    <Text style={styles.loginTxt}>Email:</Text>
+        <View style={styles.loginForm}>
+            <Text style={styles.loginHeadTxt}>
+                Login {' '}
+                <Entypo name="login" size={24} color="black" />
+            </Text>
+            <View style={styles.loginEmail}>
+                <Text style={styles.loginTxt}>Phone Number:</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="8123456789"
+                    value={email}
+                    keyboardType="phone-pad"
+                    onChangeText={handleChangeEmail} 
+                    autoCapitalize="none"
+                    cursorColor='#FFEDD6'
+                />
+            </View>
+            <View style={styles.loginPassword}>
+                <Text style={styles.loginTxt}>Password:</Text>
+                <View style={styles.iconInput}>
                     <TextInput
-                        style={styles.input}
-                        placeholder="joe@mail.com"
-                        autoCapitalize="none"
-                        value={email}
-                        onChangeText={handleChangeEmail} 
-                        //autoComplete=""
+                        style={{width: '80%', height: 25, fontSize: 17,}}
+                        placeholder="Password"
+                        value={password}
+                        onChangeText={handleChangePassword}
                         cursorColor='#FFEDD6'
+                        secureTextEntry= {hideShow}
+                        autoCapitalize="none"
                     />
-                </View>
-                <View style={styles.loginPassword}>
-                    <Text style={styles.loginTxt}>Password:</Text>
-                    <View>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Password"
-                            secureTextEntry={showPassword}
-                            value={password}
-                            autoCapitalize="none"
-                            keyboardType="visible-password"
-                            onChangeText={handleChangePassword}
-                            cursorColor='#FFEDD6'
-                        />
-                        {/* bring eye icon and blind icon with conditional */}
-                    </View>
-                </View>
-                <View style={styles.loginBtn}>
-                    <TouchableOpacity>
-                        {/* <Link href=''> */}
-                        <Button 
-                            title="Submit"
-                            color='#5CBFAB'
-                            onPress={handleSignin}
-                        />
-                        {/* </Link> */}
-                        {/* <Text style={styles.loginSubmitTxt}>Submit</Text> */}
-                    </TouchableOpacity>
-                    
-                </View>
-                <View>
-                <TouchableOpacity
-                    // onPress={()=>navigation.navigate('auth/manReg')}
-                >
-                        {/* <Link href=''> */}
-                        {/* <Button 
-                            title="Register"
-                            color='#5CBFAB'
-                            onPress={handleSignin}
-                        /> */}
-                        {/* </Link> */}
-                        {/* <Text style={styles.loginSubmitTxt}>Submit</Text> */}
-                        <Text>Register</Text>
-                    </TouchableOpacity>
-                    {/* <Link href='./regForm'> */}
-                        
-                    {/* </Link> */}
-                </View>
-                <View>
-                    <Text>Forgot Password!</Text>
+                    <Ionicons name={hideShow? "eye" : "eye-off"} size={24} onPress={toggleShowPassword} color="#DB6D32" />
                 </View>
             </View>
+            <View 
+                style={styles.loginFormBtns}
+            >
+                <TouchableOpacity 
+                    style={styles.loginBtn}
+                    onPress={handleSignin}
+                >
+                    <Text 
+                        style={styles.loginText}
+                    >Submit </Text>
+                        
+                </TouchableOpacity >
+                
+            
+                <TouchableOpacity
+                    style={styles.loginBtn}
+                    // onPress={()=>myNavigator.navigate('auth/manReg')}
+                >
+                    <Text 
+                        style={styles.loginTextForgot}
+                    >Forgot Password!</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity 
+                    // style={{marginTop: 15}}
+                    style={styles.loginBtn}
+                    // onPress={()=>navigation.navigate('auth/manReg')}
+                >
+                    <Text
+                        style={styles.loginText}
+                    >Register</Text>
+                </TouchableOpacity>
+            </View>
         </View>
+    </View>
     )
 }
 
@@ -117,32 +117,52 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     loginForm: {
-        // backgroundColor: '#B7E0F7',
-        width: '80%',
-        borderColor: '#5CBFAB',
-        borderWidth: 4,
-        height: 400,
+        // backgroundColor: '#56DB32',
+        width: '100%',
+        borderColor: '#DB6D32', //gold
+        borderWidth: 1,
+        height: 450,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20
+        borderRadius: 80
+    },
+    loginFormBtns: {
+        alignItems: 'center',
+        // backgroundColor: 'red',
+        width: '60%',
     },
     loginEmail: {
-        width: 250,
-        height: 75
+        width: '80%',
+        height: '17%',
+        marginBottom: 10,
     },
     loginPassword: {
-        width: 250,
-        height: 75,
+        width: '80%',
+        height: '17%',
         margin: 5,
+        marginBottom: '3%'
         
     },
+    iconInput: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderColor: '#DB6D32',
+        backgroundColor: '#56DB32',
+        borderWidth: 1,
+        height: 57,
+        borderRadius: 30,
+        padding: 15,
+        // marginBottom: 10,
+    },
     input: {
-        borderWidth: 3,
-        // borderColor: '#FFEDD6',
-        borderColor: '#5CBFAB',
-        height: 45,
-        borderRadius: 10,
-        padding: 15
+        fontSize: 17,
+        borderColor: '#DB6D32',   //gold
+        backgroundColor: '#56DB32',  //green
+        borderWidth: 1,
+        height: 57,
+        borderRadius: 30,
+        padding: 15,
+        
     },
     loginTxt: {
         fontSize: 20,
@@ -156,15 +176,27 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     loginBtn: {
-        // borderWidth: 3,
-        // borderColor: '#FFEDD6',
-        width: '100%',
+        borderWidth: 1,
+        borderColor: '#DB6D32',
+        backgroundColor: '#56DB32',
+        width: '80%',
         borderRadius: 10,
-        margin: 5,
-        height: 50
+        marginTop: 10,
+        marginBottom: 5,
+        height: 40,
+        justifyContent: 'center',
 
     },
-    loginIcon: {
-        
+    loginText: {
+        fontSize: 16,
+        alignSelf: 'center',
+        width: '40%',
+        // backgroundColor: 'red',
+    },
+    loginTextForgot: {
+        fontSize: 16,
+        alignSelf: 'center',
+        width: '75%',
+        // backgroundColor: 'red',
     }
 })
