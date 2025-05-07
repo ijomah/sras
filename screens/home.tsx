@@ -23,7 +23,7 @@ const HomePage = ({navigation}: any) => {
     const renderLabel = () => {
         if (value || isFocus) {
           return (
-            <Text style={[styles.label, isFocus && { color: 'blue' }]}>
+            <Text style={[styles.label, isFocus && { color: '#56DB32' }]}>
               Dropdown label
             </Text>
           );
@@ -34,16 +34,28 @@ const HomePage = ({navigation}: any) => {
     return (
         <View>
             <View style={styles.home}>                
-                <View style={styles.vendorLogoContainer}>
-                   {/* <Image
+                {/* <View style={styles.vendorLogoContainer}> */}
+                <View 
+                  style={
+                    {
+                      height: 400, 
+                      // width: 390,
+                      backgroundColor: '#DB6D32',
+                      borderBottomRightRadius: 220,
+                      borderBottomLeftRadius: 220,
+                      justifyContent: 'center',
+                      
+                    }}
+                >
+                   <Image
                         style={styles.vendorLogo} 
                         source={require('./../assets/laptopchild.jpeg')} 
-                    /> */}
-                
+                    />
+                </View>
                 <View style={styles.container}>
               {renderLabel()}
               <Dropdown
-                style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                style={[styles.dropdown, isFocus && { borderColor: '#56DB32' }]}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
                 inputSearchStyle={styles.inputSearchStyle}
@@ -66,14 +78,14 @@ const HomePage = ({navigation}: any) => {
                 renderLeftIcon={() => (
                   <AntDesign
                     style={styles.icon}
-                    color={isFocus ? 'blue' : 'black'}
+                    color={isFocus ? '#56DB32' : 'black'}
                     name="Safety"
                     size={20}
                   />
                 )}
               />
             </View>
-                </View>
+                {/* </View> */}
             </View>
         </View>
     )
@@ -82,11 +94,11 @@ const HomePage = ({navigation}: any) => {
 const styles = StyleSheet.create({
     home: {
         height: 780,
-        width: 410,
+        // width: 410,
         borderColor: '#B7E0F7',
         borderWidth: 1,
-        justifyContent: 'center',
-        alignContent: 'center'
+        // justifyContent: 'center',
+        // alignContent: 'center'
         //backgroundColor: '#F7DBB6',
         //opacity: 0.5
     },
@@ -101,10 +113,10 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
 
-    vendorLogoContainer: {
+    // vendorLogoContainer: {
         //backgroundColor: '#5CBFAB',
         // height: 100
-    },
+    // },
     navLink: {
         backgroundColor: '#B7E0F7',
         width: 90,
@@ -129,15 +141,17 @@ const styles = StyleSheet.create({
 
     //dropdown
         container: {
-          backgroundColor: '#56DB32', //green
-          padding: 16,
+          // backgroundColor: '#56DB32', //green
+          // padding: 16,
         },
         dropdown: {
           height: 50,
           borderColor: '#DB6D32',  //golden
           borderWidth: 1,
           borderRadius: 8,
-          paddingHorizontal: 8,
+          // paddingHorizontal: 8,
+          width: 340,
+          alignSelf: 'center',
         },
         icon: {
           marginRight: 5,

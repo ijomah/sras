@@ -38,7 +38,7 @@ const FirstTestScore = ({route}: any) => {
     const submitForm = async () => {
         // await storeData(userForm);
 
-        if(!isInputValid(userForm).isErr) {
+        if(!isInputValid(userForm).isErr  ) {
           console.log('i am')
             return setErrForRegInput(!isInputValid(userForm).isErr);
          }
@@ -144,7 +144,7 @@ const FirstTestScore = ({route}: any) => {
             </ScrollView>
             <View style={{
                 marginTop:10, 
-                backgroundColor:'red',
+                // backgroundColor:'red',
                 alignItems: 'center'    
             }}>
                 <MyTextInput 
@@ -167,6 +167,8 @@ const FirstTestScore = ({route}: any) => {
             </View>
             <View 
                 style={{
+                    alignSelf: 'center',
+                    width:300,
                     marginTop:78,
                 }}>
                 <Button 

@@ -57,7 +57,7 @@ export default function AffectiveEntry(props: any) {
                 console.log('oneMeta.indexPosition[0]', biggerIndex, affectiveData)
                         
                 setAffetiveData([...affectiveData, studentMeta ]);
-                ToastAndroid.show(`You Picked ${data} from ${title}`, ToastAndroid.SHORT)
+                ToastAndroid.show(`You Picked ${data} from ${title}`, 100)
             }
         })
         //   setAffetiveData(

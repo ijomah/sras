@@ -1,0 +1,44 @@
+table {
+    table-layout: auto;
+    border: 2px solid gray;
+}
+
+td, th {
+    border: 1px solid gold;
+    width: 10em;
+}
+
+caption {
+    font-weight: bolder;   
+    text-transform: uppercase;    
+}
+
+.card-head, .bio-head, .attend {
+    /* border: 1px solid black; */
+    width: 35%;
+    /* margin: 0 auto ; */
+}
+
+.bio-head {
+    display: flex;
+}
+
+.head-part {
+    display: flex;
+}
+
+/* body > div:nth-child(11) {
+    width: 50%;
+    display: flex;
+    background-color: aqua;
+} */
+.princip-comment, .master-comment, .stamp{
+    display: flex;
+}
+.princip-comment > p, .master-comment > p {
+    width: 40%;
+}
+
+.stamp > p { 
+    width: 50%;
+}

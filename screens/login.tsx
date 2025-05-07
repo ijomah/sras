@@ -58,7 +58,7 @@ function LoginPage({navigation}: any) {
                 <Text style={styles.loginTxt}>Password:</Text>
                 <View style={styles.iconInput}>
                     <TextInput
-                        style={{width: '80%', height: 25, fontSize: 17,}}
+                        style={{borderColor: 'green', width: '80%', height: 25, fontSize: 17,}}
                         placeholder="Password"
                         value={password}
                         onChangeText={handleChangePassword}

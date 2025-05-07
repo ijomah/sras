@@ -144,7 +144,7 @@ const ExamScore = ({route}: any) => {
             </ScrollView>
             <View style={{
                 marginTop:10, 
-                backgroundColor:'red',
+                // backgroundColor:'red',
                 alignItems: 'center'    
             }}>
                 <MyTextInput 
@@ -168,13 +168,15 @@ const ExamScore = ({route}: any) => {
             </View>
             <View 
                 style={{
+                  alignSelf: 'center',
+                    width:300,
                     marginTop:78,
                 }}>
-                {/* <Button 
+                <Button 
                     title="Submit"
                     onPress={submitForm}
                     disabled={errForRegInput}
-                /> */}
+                />
             </View>
         </SafeAreaView>
     )

@@ -7,7 +7,7 @@ import { StudentContext } from "../../context/studContext";
 
 export default function CommentPart(this: any) {
     const studentData = useContext(StudentContext);
-    const [inputText, setInputText] = useState('')
+    const [inputText, setInputText] = useState()
 
     const [userForm, setUserForm] = useState({
         id: studentData.id,
@@ -39,7 +39,7 @@ export default function CommentPart(this: any) {
         //  }
         //  '/api/v1/register'
         // saveData(userForm);
-        setInputText('')
+        // setInputText()
         // axios.post(BACKEND_URL+'/api/v1/register',
         //     userForm
         // ).then((postRes) => {
@@ -72,7 +72,7 @@ export default function CommentPart(this: any) {
                 <Text>Teacher's or Principal's Comment</Text>
                <MyTextInput 
                     label="Enter Comment" 
-                    inputErr={undefined} 
+                    inputErr={errForRegInput} 
                     inputConfig={{
                         multiline: true,
                         textAlignVertical: 'top',
@@ -87,6 +87,7 @@ export default function CommentPart(this: any) {
             <View 
                 style={{                
                     alignSelf: 'center',
+                    width:300,
                     marginTop:160,
                 }}>
                 <Button 

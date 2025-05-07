@@ -143,12 +143,12 @@ const SecondTestScore = ({navigation, route}: any) => {
             </ScrollView>
             <View style={{
                 marginTop:10, 
-                backgroundColor:'red',
+                // backgroundColor:'red',
                 alignItems: 'center'    
             }}>
                 <MyTextInput 
                     label="Enter Second Test Score" 
-                    inputErr={undefined} 
+                    inputErr={errForRegInput} 
                     inputConfig={{
                         multiline: false,
                         readOnly: editing,
@@ -167,6 +167,8 @@ const SecondTestScore = ({navigation, route}: any) => {
             </View>
             <View 
                 style={{
+                    alignSelf: 'center',
+                    width:300,
                     marginTop:78,
                 }}>
                 <Button 
