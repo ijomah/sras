@@ -3,7 +3,10 @@ import React, {useState, useContext} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import Checkbox, { CheckboxEvent } from 'expo-checkbox';
 
-import { Alert, Button, ScrollView, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, ScrollView, StyleSheet, Text, 
+    ToastAndroid, 
+    TouchableOpacity, 
+    View } from 'react-native';
 
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
 import { StudentContext } from '../../context/studContext';
@@ -57,7 +60,7 @@ export default function AffectiveEntry(props: any) {
                 console.log('oneMeta.indexPosition[0]', biggerIndex, affectiveData)
                         
                 setAffetiveData([...affectiveData, studentMeta ]);
-                ToastAndroid.show(`You Picked ${data} from ${title}`, 100)
+                // ToastAndroid.show(`You Picked ${data} from ${title}`, 100)
             }
         })
         //   setAffetiveData(

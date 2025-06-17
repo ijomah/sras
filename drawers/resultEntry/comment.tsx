@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { SafeAreaView, View, Text, StyleSheet, Button, Alert } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, Image,Button, Alert } from "react-native";
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { useState } from "react";
@@ -68,6 +68,14 @@ export default function CommentPart(this: any) {
     
     return (
         <SafeAreaView>
+            <View style={styles.commentPix}>
+                <Image 
+                    style={{width:100, height:100, borderRadius:10   }}
+                    source={require('./../../assets/avarter.jpg')}
+                />
+                <Text>{'StudentName'}</Text>
+                <Text>{'studentAverge'}</Text>
+            </View>
             <View style={styles.commentPart}>
                 <Text>Teacher's or Principal's Comment</Text>
                <MyTextInput 
@@ -106,5 +114,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop:10,  
+    },
+    commentPix:{
+        alignItems:'center',
+        justifyContent:'center',
     }
+
 })

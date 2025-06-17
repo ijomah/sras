@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "myschres",
-    "slug": "myschres",
+    "name": "schres",
+    "slug": "schres",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jacobianijo.schres"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1621d558-706f-4049-8695-104876a9d90a"
+      }
     }
   }
 }

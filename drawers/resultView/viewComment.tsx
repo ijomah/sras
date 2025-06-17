@@ -1,9 +1,13 @@
 import React from "react";
-import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
+import { SafeAreaView, 
+    View, Text, Image, 
+    StyleSheet, 
+    ScrollView } from "react-native";
 
 export default function ViewComment() {
     return (
-        <SafeAreaView>
+        // <SafeAreaView>
+        <ScrollView>
             <View style={styles.topBox}>
                 {/* sch pix thumbnail */}
                 <Image
@@ -41,7 +45,8 @@ export default function ViewComment() {
                     <Text>{'emoji 4 comment'}</Text>
                 </View>
             </View>
-        </SafeAreaView>
+        </ScrollView>
+        // </SafeAreaView>
     )
 }
 

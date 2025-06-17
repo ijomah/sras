@@ -143,7 +143,8 @@ const FirstTestScore = ({route}: any) => {
             />
             </ScrollView>
             <View style={{
-                marginTop:10, 
+                marginTop:10,
+                
                 // backgroundColor:'red',
                 alignItems: 'center'    
             }}>

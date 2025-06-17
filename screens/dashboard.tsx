@@ -6,7 +6,7 @@ const Dashboard = ({navigation}: any) => {
     const itms = [
         {id: 1, do: 'studListForRes', title: "Enter Result", pathName: 'editDrawer'},
         {id: 2, do: 'studList', title: "View Result", pathName: 'viewDrawer'},
-        {id: 3, do: 'studentReg', title: "Register student"},
+        {id: 3, do: 'studentReg', title: "Enter Attendance"},
         {id: 4, do: 'admin', title: "Admin Section"}
     ]
     // #56DB32 -green color

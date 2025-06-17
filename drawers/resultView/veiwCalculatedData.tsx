@@ -3,7 +3,10 @@ import { SafeAreaView, View, Text, Image, StyleSheet,ScrollView, } from "react-n
 
 export default function ViewGrandTotals() {
     return (
-        <SafeAreaView style={styles.perform}>
+        // <SafeAreaView style={styles.perform}>
+            <ScrollView 
+                contentContainerStyle={styles.perform}
+            >
             <View>
                 <Image 
                     style={styles.grandTotal}
@@ -59,7 +62,8 @@ export default function ViewGrandTotals() {
                     
                 </View>
             </ScrollView>
-        </SafeAreaView>
+            </ScrollView>
+        // </SafeAreaView>
     )
 }
 
