@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './screens/home';
 import LoginPage from './screens/login';
 import Dashboard from './screens/dashboard';
+import ClassListPage from './screens/classList'
 import StudentList from './screens/studentList';
 import SchoolHead from './screens/schHeads';
 import ResultPreviewer from './screens/resultPreviewer';
@@ -26,6 +27,7 @@ export default function App() {
         <Screen name='home' component={HomePage} />
         <Screen name='login' component={LoginPage} />
         <Screen name='dash' component={Dashboard} />
+        <Screen name='classListForRes' component={ClassListPage} />
         <Screen name='studListForRes' component={StudentList} />
         <Screen name='studList' component={StudentList} />
         <Screen name='admin' component={SchoolHead} />

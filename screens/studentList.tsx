@@ -24,13 +24,13 @@ const StudentList = ({navigation, route}: any) => {
     const showStudList = ({item}: any) => {
         // 'viewDrawer'
         //'editDrawer'
-        const routeName: string =  route.params.pathName
+        const routeNameStuList: string =  route.params.pathName
         return (
             <TouchableOpacity
                 style={styles.pressable}
                 onPress={() => {
                     //goto drawer
-                    navigation.navigate(routeName, {
+                    navigation.navigate(routeNameStuList, {
                                     name: item.name,
                                     id: item.id,
                                     schId: item.schId,

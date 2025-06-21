@@ -8,6 +8,10 @@ node_modules/
 dist/
 web-build/
 
+#mythings
+blogs/
+
+
 # Native
 *.orig.*
 *.jks

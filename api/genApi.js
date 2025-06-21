@@ -6,6 +6,7 @@ import { API_URL } from './apiEnv';
 
 // const path = '/api/v1/register';
 
+
 export const getDocumentInfo = async (path) => {
     return await axios.get(API_URL + path)
         .then(handleResponse)
