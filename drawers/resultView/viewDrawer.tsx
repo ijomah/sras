@@ -8,7 +8,8 @@ import CognitPage from "./Cognitive";
 import PsychoPage from "./Psychomotor";
 import ViewComment from "./viewComment";
 import ViewGrandTotals from "./veiwCalculatedData";
-
+import ClassBroadSheetPage from './classBroadsheet';
+import SettingsScreen from './../../screens/appSetting';
 
 const {Navigator, Screen} = createDrawerNavigator();
 
@@ -20,6 +21,8 @@ const ResultViewDrawer = () => {
             <Screen name="psycho" component={PsychoPage} />
             <Screen name="viewComment" component={ViewComment} />
             <Screen name="grandTotal" component={ViewGrandTotals} />
+            <Screen name='classBroadSheet' component={ClassBroadSheetPage} />
+            <Screen name='settings' component={SettingsScreen} />
         </Navigator>
     )
 }

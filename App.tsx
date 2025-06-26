@@ -27,6 +27,7 @@ export default function App() {
         <Screen name='home' component={HomePage} />
         <Screen name='login' component={LoginPage} />
         <Screen name='dash' component={Dashboard} />
+        
         <Screen name='classListForRes' component={ClassListPage} />
         <Screen name='studListForRes' component={StudentList} />
         <Screen name='studList' component={StudentList} />

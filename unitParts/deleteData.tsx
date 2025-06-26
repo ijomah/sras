@@ -1,0 +1,1 @@
+const deleteFxn = (arr: any[], st: any, no: number) => arr.splice(st, no)

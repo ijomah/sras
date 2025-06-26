@@ -12,6 +12,7 @@ import ExamScore from "./exam";
 import NoteScore from "./noteScore";
 import PsychomotorEntry from "./enterPsychomotor";
 import AffectiveEntry from "./enterAffective";
+import SettingsScreen from "../../screens/appSetting";
 
 
 const {Navigator, Screen} = createDrawerNavigator();
@@ -37,6 +38,7 @@ const ResultEditDrawer = ({route}: any) => {
                 <Screen name="exam" component={ExamScore} />
                 <Screen name="psychoEntry" component={PsychomotorEntry} />
                 <Screen name="affectEntry" component={AffectiveEntry} />
+                <Screen name='settings' component={SettingsScreen} />
             </Navigator>
         </StudentContext.Provider>
     )
