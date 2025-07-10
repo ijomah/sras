@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert, Image, TouchableOpacity, TextInputComponent, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Alert, Image, TouchableOpacity, TextInputComponent, TextInput, Button, ScrollView } from 'react-native';
 
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -36,74 +36,94 @@ function LoginPage({navigation}: any) {
         setHideShow(!hideShow); 
     }; 
     return (
-        <View style={styles.loginBox}>
-        <View style={styles.loginForm}>
-            <Text style={styles.loginHeadTxt}>
-                Login {' '}
-                <Entypo name="login" size={24} color="black" />
-            </Text>
-            <View style={styles.loginEmail}>
-                <Text style={styles.loginTxt}>Phone Number:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="8123456789"
-                    value={email}
-                    keyboardType="phone-pad"
-                    onChangeText={handleChangeEmail} 
-                    autoCapitalize="none"
-                    cursorColor='#FFEDD6'
-                />
-            </View>
-            <View style={styles.loginPassword}>
-                <Text style={styles.loginTxt}>Password:</Text>
-                <View style={styles.iconInput}>
+        <ScrollView>
+            <View style={styles.loginBox}>
+            <View style={styles.loginForm}>
+                <Text style={styles.loginHeadTxt}>
+                    Login {' '}
+                    <Entypo name="login" size={24} color="black" />
+                </Text>
+                <View style={styles.loginEmail}>
+                    <Text style={styles.loginTxt}>Phone Number:</Text>
                     <TextInput
-                        style={{borderColor: 'green', width: '80%', height: 25, fontSize: 17,}}
-                        placeholder="Password"
-                        value={password}
-                        onChangeText={handleChangePassword}
-                        cursorColor='#FFEDD6'
-                        secureTextEntry= {hideShow}
+                        style={styles.input}
+                        placeholder="8123456789"
+                        value={email}
+                        keyboardType="phone-pad"
+                        onChangeText={handleChangeEmail} 
                         autoCapitalize="none"
+                        cursorColor='#FFEDD6'
                     />
-                    <Ionicons name={hideShow? "eye" : "eye-off"} size={24} onPress={toggleShowPassword} color="#DB6D32" />
+                </View>
+                <View style={styles.loginPassword}>
+                    <Text style={styles.loginTxt}>Password:</Text>
+                    <View style={styles.iconInput}>
+                        <TextInput
+                            style={{borderColor: 'green', width: '80%', height: 25, fontSize: 17,}}
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={handleChangePassword}
+                            cursorColor='#FFEDD6'
+                            secureTextEntry= {hideShow}
+                            autoCapitalize="none"
+                        />
+                        <Ionicons name={hideShow? "eye" : "eye-off"} size={24} onPress={toggleShowPassword} color="#DB6D32" />
+                    </View>
+                </View>
+                <View 
+                    style={styles.loginFormBtns}
+                >
+                    <TouchableOpacity 
+                        style={styles.loginBtn}
+                        onPress={handleSignin}
+                    >
+                        <Text 
+                            style={styles.loginText}
+                        >Submit </Text>
+                            
+                    </TouchableOpacity >
+                    
+                
+                    <TouchableOpacity
+                        style={styles.loginBtn}
+                        // onPress={()=>myNavigator.navigate('auth/manReg')}
+                    >
+                        <Text 
+                            style={styles.loginTextForgot}
+                        >Forgot Password!</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity 
+                        // style={{marginTop: 15}}
+                        style={styles.loginBtn}
+                        // onPress={()=>navigation.navigate('auth/manReg')}
+                    >
+                        <Text
+                            style={styles.loginText}
+                        >Register</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-            <View 
-                style={styles.loginFormBtns}
-            >
-                <TouchableOpacity 
-                    style={styles.loginBtn}
-                    onPress={handleSignin}
-                >
-                    <Text 
-                        style={styles.loginText}
-                    >Submit </Text>
-                        
-                </TouchableOpacity >
-                
-            
-                <TouchableOpacity
-                    style={styles.loginBtn}
-                    // onPress={()=>myNavigator.navigate('auth/manReg')}
-                >
-                    <Text 
-                        style={styles.loginTextForgot}
-                    >Forgot Password!</Text>
-                </TouchableOpacity>
-                
-                <TouchableOpacity 
-                    // style={{marginTop: 15}}
-                    style={styles.loginBtn}
-                    // onPress={()=>navigation.navigate('auth/manReg')}
-                >
-                    <Text
-                        style={styles.loginText}
-                    >Register</Text>
-                </TouchableOpacity>
             </View>
-        </View>
-    </View>
+
+            <View style={{justifyContent:'space-between',minHeight:200}}>
+                <View>
+                    <TouchableOpacity style={styles.iconInput} onPress={()=>console.log('authServer')}>
+                    <Text style={styles.socialStyle}>{'Sign with Google'}</Text>    
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.iconInput} onPress={()=>console.log('authServer')}>
+                    <Text style={styles.socialStyle}>{'Sign with WhatsApp'}</Text>    
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity style={styles.iconInput} onPress={()=>console.log('authServer')}>
+                    <Text style={styles.socialStyle}>{'Sign with Facebook'}</Text>    
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </ScrollView>
     )
 }
 
@@ -144,8 +164,8 @@ const styles = StyleSheet.create({
         
     },
     iconInput: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection:'row',
+        justifyContent:'space-around',
         borderColor: '#DB6D32',
         backgroundColor: '#56DB32',
         borderWidth: 1,
@@ -198,5 +218,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: '75%',
         // backgroundColor: 'red',
-    }
+    },
+    socialStyle:{
+        textAlign:'center'
+    },
+    socialLoginStyle:{}
 })

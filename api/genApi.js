@@ -2,14 +2,14 @@ import { handleResponse, handleError } from './apiUtil';
 import axios from 'axios';
 // const API_URL = process.env.RN_APP_API_URL + '/api/v1/register';
 
-import { API_URL } from './apiEnv';
+import { API_URL, sheetAuth } from './apiEnv';
 
 // const path = '/api/v1/register';
 
 
 export const getDocumentInfo = async (path) => {
-    return await axios.get(API_URL + path)
-        .then(handleResponse)
+    return await axios.get(sheetAuth + path)
+        .then(()=>console.log(handleResponse))
         .catch(handleError);
 }
 

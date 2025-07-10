@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
 
-export default function App() {
+export default function AddThings() {
   const [items, setItems] = useState([]); // State to hold the list items
   const [newItemText, setNewItemText] = useState(''); // State to hold the text for the new item
 
-  const addItem = () => {
+  const createData = () => {
     if (newItemText.trim() !== '') { // Ensure the text is not empty
       setItems([...items, { id: Date.now().toString(), text: newItemText }]); // Add new item to the array
       setNewItemText(''); // Clear the input field
@@ -26,7 +26,7 @@ export default function App() {
 
       <FlatList
         data={items}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item:any) => item.id}
         renderItem={({ item }) => (
           <View style={styles.listItem}>
             <Text>{item.text}</Text>

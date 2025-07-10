@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Button, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Button, StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, FlatList } from 'react-native';
 import { Dropdown, MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { studentList } from '../data';
+import MyTextInput from '../unitParts/reuseTextInput';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -21,6 +22,17 @@ import { studentList } from '../data';
     const [value, setValue] = useState('');
     const [selected, setSelected] = useState([]);
     const [isFocus, setIsFocus] = useState(false);
+
+    //The 'Items' array will be populated from the api
+    const [items, setItems] = useState([{id: '', text: ''}]); // State to hold the list items
+    const [newItemText, setNewItemText] = useState(''); // State to hold the text for the new item
+    
+      const addItem = () => {
+        if (newItemText.trim() !== '') { // Ensure the text is not empty
+          setItems([...items, { id: Date.now().toString(), text: newItemText }]); // Add new item to the array
+          setNewItemText(''); // Clear the input field
+        }
+      };
 
     const listStudents = () => {
       //
@@ -142,7 +154,63 @@ import { studentList } from '../data';
                     onPress={listStudents}
                 />
         </SafeAreaView>
+        <View style={{alignItems:'center',justifyContent:'space-between',minHeight:180}}>
+              <View 
+            //  style={
+            //         styles.appliName
+            //       }
+              >
+                    <MyTextInput 
+                        label="Spread Sheet ID:" 
+                        // inputErr={errInData.lname}
+                        inputConfig={{
+                            placeholder:"id",
+                            // keyboardType:"numeric",
+                            // onChangeText:setReg.bind(this, 'sheetId')
+                        }}
+                    />
+                </View>
+                <View 
+            //  style={
+            //         styles.appliName
+            //       }
+              >
+                    <MyTextInput 
+                        label="Service Id:" 
+                        // inputErr={errInData.lname}
+                        inputConfig={{
+                            placeholder:"id:",
+                            // keyboardType:"numeric",
+                            // onChangeText:setReg.bind(this, 'serviceId')
+                        }}
+                    />
+                </View>
+              </View>
+      {/* adding student */}
+
+      <View style={styles.container1}>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Add new Student"
+                value={newItemText}
+                onChangeText={setNewItemText}
+              />
+              
+              <Button title="Add Item" onPress={addItem} />
+            </View>
       
+            <FlatList
+              data={items}
+              keyExtractor={(item:any) => item.id}
+              renderItem={({ item }) => (
+                <View style={styles.listItem}>
+                  <Text>{item.text}</Text>
+                </View>
+              )}
+            />
+             
+          </View>
       </>
     );
   };
@@ -291,4 +359,28 @@ import { studentList } from '../data';
         marginRight: 5,
         fontSize: 16,
       },
+
+      //addingStudent
+      container1: {
+    flex: 1,
+    paddingTop: 50,
+    paddingHorizontal: 20,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginRight: 10,
+  },
+  listItem: {
+    padding: 15,
+    backgroundColor: '#f0f0f0',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
   });

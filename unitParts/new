@@ -1,113 +1,113 @@
-The core logic for a React Native edit profile feature involves managing user data, handling input changes, and persisting updates to a backend or local storage.
-1. State Management:
-Utilize React's useState hook to manage the user's profile data (e.g., username, email, bio).
-Initialize the state with the current user's profile information, typically fetched from an API or local storage upon component mount.
-JavaScript
+// The core logic for a React Native edit profile feature involves managing user data, handling input changes, and persisting updates to a backend or local storage.
+// 1. State Management:
+// Utilize React's useState hook to manage the user's profile data (e.g., username, email, bio).
+// Initialize the state with the current user's profile information, typically fetched from an API or local storage upon component mount.
+// JavaScript
 
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, Alert } from 'react-native';
+// import React, { useState, useEffect } from 'react';
+// import { View, TextInput, Button, Text, Alert } from 'react-native';
 
-const EditProfileScreen = ({ navigation }) => {
-  const [profileData, setProfileData] = useState({
-    username: '',
-    email: '',
-    bio: '',
-  });
+// const EditProfileScreen = ({ navigation }) => {
+//   const [profileData, setProfileData] = useState({
+//     username: '',
+//     email: '',
+//     bio: '',
+//   });
 
-  useEffect(() => {
-    // Fetch user profile data from API or local storage
-    // For demonstration, we'll use dummy data
-    const fetchUserProfile = async () => {
-      try {
-        // Simulate API call
-        const response = await new Promise(resolve => setTimeout(() => {
-          resolve({ username: 'JohnDoe', email: 'john.doe@example.com', bio: 'A passionate developer.' });
-        }, 500));
-        setProfileData(response);
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-      }
-    };
-    fetchUserProfile();
-  }, []);
+//   useEffect(() => {
+//     // Fetch user profile data from API or local storage
+//     // For demonstration, we'll use dummy data
+//     const fetchUserProfile = async () => {
+//       try {
+//         // Simulate API call
+//         const response = await new Promise(resolve => setTimeout(() => {
+//           resolve({ username: 'JohnDoe', email: 'john.doe@example.com', bio: 'A passionate developer.' });
+//         }, 500));
+//         setProfileData(response);
+//       } catch (error) {
+//         console.error('Error fetching profile:', error);
+//       }
+//     };
+//     fetchUserProfile();
+//   }, []);
 
-  // ... rest of the component
-};
-2. Input Handling:
-Bind TextInput components to the state variables using the value prop.
-Implement onChangeText handlers to update the state as the user types.
-JavaScript
+//   // ... rest of the component
+// };
+// 2. Input Handling:
+// Bind TextInput components to the state variables using the value prop.
+// Implement onChangeText handlers to update the state as the user types.
+// JavaScript
 
-  const handleInputChange = (field, value) => {
-    setProfileData(prevData => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
+//   const handleInputChange = (field, value) => {
+//     setProfileData(prevData => ({
+//       ...prevData,
+//       [field]: value,
+//     }));
+//   };
 
-  return (
-    <View style={{ padding: 20 }}>
-      <Text>Username:</Text>
-      <TextInput
-        style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 10 }}
-        value={profileData.username}
-        onChangeText={(text) => handleInputChange('username', text)}
-      />
+//   return (
+//     <View style={{ padding: 20 }}>
+//       <Text>Username:</Text>
+//       <TextInput
+//         style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 10 }}
+//         value={profileData.username}
+//         onChangeText={(text) => handleInputChange('username', text)}
+//       />
 
-      <Text>Email:</Text>
-      <TextInput
-        style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 10 }}
-        value={profileData.email}
-        onChangeText={(text) => handleInputChange('email', text)}
-        keyboardType="email-address"
-      />
+//       <Text>Email:</Text>
+//       <TextInput
+//         style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 10 }}
+//         value={profileData.email}
+//         onChangeText={(text) => handleInputChange('email', text)}
+//         keyboardType="email-address"
+//       />
 
-      <Text>Bio:</Text>
-      <TextInput
-        style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 20, height: 80 }}
-        value={profileData.bio}
-        onChangeText={(text) => handleInputChange('bio', text)}
-        multiline
-      />
+//       <Text>Bio:</Text>
+//       <TextInput
+//         style={{ borderWidth: 1, borderColor: 'gray', padding: 8, marginBottom: 20, height: 80 }}
+//         value={profileData.bio}
+//         onChangeText={(text) => handleInputChange('bio', text)}
+//         multiline
+//       />
 
-      {/* ... Save Button */}
-    </View>
-  );
-3. Saving Changes:
-Create a function to handle the "Save Changes" action.
-This function should validate the input data if necessary.
-Send the updated profileData to your backend API or update local storage.
-Provide feedback to the user (e.g., success message, error message).
-JavaScript
+//       {/* ... Save Button */}
+//     </View>
+//   );
+// 3. Saving Changes:
+// Create a function to handle the "Save Changes" action.
+// This function should validate the input data if necessary.
+// Send the updated profileData to your backend API or update local storage.
+// Provide feedback to the user (e.g., success message, error message).
+// JavaScript
 
-  const handleSaveChanges = async () => {
-    try {
-      // Simulate API call to update profile
-      await new Promise(resolve => setTimeout(() => {
-        // In a real app, you'd send profileData to your backend
-        console.log('Profile updated:', profileData);
-        resolve();
-      }, 500));
-      Alert.alert('Success', 'Profile updated successfully!');
-      navigation.goBack(); // Navigate back after successful save
-    } catch (error) {
-      console.error('Error saving profile:', error);
-      Alert.alert('Error', 'Failed to update profile. Please try again.');
-    }
-  };
+//   const handleSaveChanges = async () => {
+//     try {
+//       // Simulate API call to update profile
+//       await new Promise(resolve => setTimeout(() => {
+//         // In a real app, you'd send profileData to your backend
+//         console.log('Profile updated:', profileData);
+//         resolve();
+//       }, 500));
+//       Alert.alert('Success', 'Profile updated successfully!');
+//       navigation.goBack(); // Navigate back after successful save
+//     } catch (error) {
+//       console.error('Error saving profile:', error);
+//       Alert.alert('Error', 'Failed to update profile. Please try again.');
+//     }
+//   };
 
-  return (
-    <View style={{ padding: 20 }}>
-      {/* ... TextInputs */}
-      <Button title="Save Changes" onPress={handleSaveChanges} />
-    </View>
-  );
-};
+//   return (
+//     <View style={{ padding: 20 }}>
+//       {/* ... TextInputs */}
+//       <Button title="Save Changes" onPress={handleSaveChanges} />
+//     </View>
+//   );
+// };
 
-export default EditProfileScreen;
-Key Considerations:
-Error Handling: Implement robust error handling for API calls and input validation.
-Loading States: Show a loading indicator while fetching or saving data.
-User Experience: Provide clear feedback to the user on success or failure.
-Security: If handling sensitive data, ensure secure communication with your backend.
-Form Validation: Add client-side validation for input fields (e.g., email format, required fields).
+// export default EditProfileScreen;
+// Key Considerations:
+// Error Handling: Implement robust error handling for API calls and input validation.
+// Loading States: Show a loading indicator while fetching or saving data.
+// User Experience: Provide clear feedback to the user on success or failure.
+// Security: If handling sensitive data, ensure secure communication with your backend.
+// Form Validation: Add client-side validation for input fields (e.g., email format, required fields).

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Switch, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { getDocumentInfo } from '../api/genApi';
 
 const SettingsScreen = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -24,6 +25,12 @@ const SettingsScreen = () => {
       {/* Account Settings */}
       <View style={styles.section}>
         <Text style={styles.sectionHeader}>Account</Text>
+        {/* <TouchableOpacity style={styles.settingItem} onPress={() => console.log('call auth server')}>
+          <Text style={styles.settingText}>Google Drive</Text>
+        </TouchableOpacity> */}
+        <TouchableOpacity style={styles.settingItem} onPress={() => getDocumentInfo('')}>
+          <Text style={styles.settingText}>Google Sheet</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.settingItem} onPress={() => console.log('Edit profile pressed')}>
           <Text style={styles.settingText}>Edit Profile</Text>
         </TouchableOpacity>
