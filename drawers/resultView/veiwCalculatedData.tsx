@@ -1,12 +1,14 @@
 import React from "react";
 import { SafeAreaView, View, Text, Image, StyleSheet,ScrollView, } from "react-native";
+import { htmlSenior } from "../../sch-res-PDF-output/otega-senior";
+import { shareAsync } from "expo-sharing";
 
 export default function ViewGrandTotals() {
     //Function4pdfExport
     // const printToFile = async () => {
     //     // On iOS/android prints the given html. On web prints the HTML from the current page.
-    //     console.log(html)
-    //     const { uri } = await Print.printToFileAsync({ html });
+    //     console.log(htmlSenior)
+    //     const { uri } = await Print.printToFileAsync({ htmlSenior });
     //     console.log('File has been saved to:', uri);
     //     await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
     //   };

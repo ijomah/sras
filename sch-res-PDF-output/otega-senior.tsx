@@ -1,9 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+// <!DOCTYPE html>
+export const html = `<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta author="Jac" />
-        <link rel="stylesheet" href="./otega-senior.css" type="text/css"/>
+        <link rel="stylesheet" href="./../" type="text/css"/>
+        <style>
+                    table {
+            table-layout: auto;
+            border: 2px solid gray;
+        }
+
+        td, th {
+            border: 1px solid gold;
+            width: 10em;
+        }
+
+        caption {
+            font-weight: bolder;   
+            text-transform: uppercase;    
+        }
+
+        .card-head, .bio-head, .attend {
+            /* border: 1px solid black; */
+            width: 35%;
+            /* margin: 0 auto ; */
+        }
+
+        .bio-head {
+            display: flex;
+        }
+
+        .head-part {
+            display: flex;
+        }
+
+        /* body > div:nth-child(11) {
+            width: 50%;
+            display: flex;
+            background-color: aqua;
+        } */
+        .princip-comment, .master-comment, .stamp{
+            display: flex;
+        }
+        .princip-comment > p, .master-comment > p {
+            width: 40%;
+        }
+
+        .stamp > p { 
+            width: 50%;
+        }
+        </style>
     </head>
     <body>
         <div>
@@ -469,8 +515,8 @@
             
         </div>
     </body>
-</html>
-<script>
+</html>`
+// <!-- <script>
     // create an obj with items
     let resData = {
         sch: '',
@@ -487,4 +533,18 @@
 
     }
 
-</script>
+    interface rawData {
+        sch: string,
+        schLocation: string,
+        fname: string,
+        lname: string,
+        mname: string,
+        resDet: object[],
+        scoreData: object[],
+        sportsData: object[],
+        comment: string,
+        sign: string,
+        pix: string,
+    }
+
+// </script> -->

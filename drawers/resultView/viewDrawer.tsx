@@ -10,6 +10,7 @@ import ViewComment from "./viewComment";
 import ViewGrandTotals from "./veiwCalculatedData";
 import ClassBroadSheetPage from './classBroadsheet';
 import SettingsScreen from './../../screens/appSetting';
+import DownloadRes from "./downloadRes";
 
 const {Navigator, Screen} = createDrawerNavigator();
 
@@ -22,7 +23,8 @@ const ResultViewDrawer = () => {
             <Screen name="viewComment" component={ViewComment} />
             <Screen name="grandTotal" component={ViewGrandTotals} />
             <Screen name='classBroadSheet' component={ClassBroadSheetPage} />
-            <Screen name='settings' component={SettingsScreen} />
+            <Screen name='Download' component={DownloadRes} />
+            <Screen name='Settings' component={SettingsScreen} />
         </Navigator>
     )
 }
