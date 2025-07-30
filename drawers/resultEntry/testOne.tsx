@@ -2,7 +2,8 @@ import React, {useContext, useState} from "react";
 import { SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Text, View, Button, Alert } from "react-native";
 import { Dropdown, MultiSelect } from "react-native-element-dropdown";
 import { AntDesign } from '@expo/vector-icons';
-
+//UI
+import TopDecor from "../../unitParts/decor";
 import { docTypeArr } from "../../data";
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
@@ -98,6 +99,7 @@ const FirstTestScore = ({route}: any) => {
 
         <SafeAreaView>
             <ScrollView>
+              <TopDecor titleText = 'First Test'/>
             <MultiSelect 
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}

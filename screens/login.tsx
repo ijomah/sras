@@ -4,6 +4,11 @@ import { StyleSheet, Text, View, Alert, Image, TouchableOpacity, TextInputCompon
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
+// import {
+//   GoogleOneTapSignIn,
+//   GoogleLogoButton,
+// } from '@react-native-google-signin/google-signin';
+
 function LoginPage({navigation}: any) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -35,6 +40,39 @@ function LoginPage({navigation}: any) {
     const toggleShowPassword = () => { 
         setHideShow(!hideShow); 
     }; 
+
+    //g-sign-in
+   
+
+{/* <GoogleLogoButton onPress={startSignInFlow} label="Sign in with Google" />;
+
+const startSignInFlow = async () => {
+  try {
+    GoogleOneTapSignIn.configure(); // move this to after your app starts
+    await GoogleOneTapSignIn.checkPlayServices();
+    const signInResponse = await GoogleOneTapSignIn.signIn();
+    if (signInResponse.type === 'success') {
+      // use signInResponse.data
+    } else if (signInResponse.type === 'noSavedCredentialFound') {
+      // the user wasn't previously signed into this app
+      const createResponse = await GoogleOneTapSignIn.createAccount();
+      if (createResponse.type === 'success') {
+        // use createResponse.data
+      } else if (createResponse.type === 'noSavedCredentialFound') {
+        // no Google user account was present on the device yet (unlikely but possible)
+        const explicitResponse =
+          await GoogleOneTapSignIn.presentExplicitSignIn();
+
+        if (explicitResponse.type === 'success') {
+          // use explicitResponse.data
+        }
+      }
+    }
+    // the else branches correspond to the user canceling the sign in
+  } catch (error) {
+    // handle error
+  }
+}; */}
     return (
         <ScrollView>
             <View style={styles.loginBox}>

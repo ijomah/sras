@@ -5,6 +5,7 @@ import { useState } from 'react';
 // import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import { Table, TableWrapper, Row } from 'react-native-reanimated-table';
+import TopDecor from '../../unitParts/decor';
 
 
 export default function CognitPage(props: any) {
@@ -28,6 +29,7 @@ export default function CognitPage(props: any) {
                   }   
                   return (
                   <View style={styles.container}>
+                    <TopDecor textTitle={'Cognitive'} />
                     <Text
                       style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
                     >CONGITIVE DOMAIN</Text>

@@ -8,6 +8,7 @@ import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { StudentContext } from "../../context/studContext";
 import { saveData } from "../../api/genApi";
+import TopDecor from "../../unitParts/decor";
 
 
 const SecondTestScore = ({navigation, route}: any) => {
@@ -97,6 +98,7 @@ const SecondTestScore = ({navigation, route}: any) => {
 
         <SafeAreaView>
             <ScrollView>
+              <TopDecor textTitle={'Second Test'}/>
             <MultiSelect 
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}

@@ -10,6 +10,7 @@ import { isInputValid } from "../../unitParts/errFunc";
 
 import { StudentContext } from "../../context/studContext";
 import { saveData } from "../../api/genApi";
+import TopDecor from "../../unitParts/decor";
 
 const NoteScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
@@ -99,6 +100,7 @@ const NoteScore = ({route}: any) => {
 
         <SafeAreaView>
             <ScrollView>
+              <TopDecor textTitle={'Note Score'} />
             <MultiSelect 
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}

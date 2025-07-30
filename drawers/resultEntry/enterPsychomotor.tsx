@@ -4,6 +4,7 @@ import { Alert, Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } f
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
 import { StudentContext } from '../../context/studContext';
 import { saveData } from '../../api/genApi';
+import TopDecor from '../../unitParts/decor';
 
 export default function PsychomotorEntry(props: any) {
     
@@ -80,6 +81,7 @@ export default function PsychomotorEntry(props: any) {
 
             return (
             <View style={styles.container}>
+                <TopDecor textTitle={'Psychomotor'} />
               <Text
                 style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
               >
