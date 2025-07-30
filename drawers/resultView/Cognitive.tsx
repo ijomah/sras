@@ -29,7 +29,7 @@ export default function CognitPage(props: any) {
                   }   
                   return (
                   <View style={styles.container}>
-                    <TopDecor textTitle={'Cognitive'} />
+                    <TopDecor textTitle='Cognitive' />
                     <Text
                       style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
                     >CONGITIVE DOMAIN</Text>

@@ -11,7 +11,7 @@ import {Image, Text, useWindowDimensions, View} from 'react-native';
 //     )
 // }
 
-export default function TopDecor(titleText: any) {
+export default function TopDecor({textTitle}:any) {
     const {height, width, fontScale} = useWindowDimensions()
     return (
       <LinearGradient style={{width: width, height: height / 5, padding: width / 10, borderColor: '#DB6D32',
@@ -20,12 +20,12 @@ export default function TopDecor(titleText: any) {
       <View >
         <View>
             <Text>
-                {`Values for ${' '}${titleText} ${' '}`}
+                {`Values for ${textTitle}`}
             </Text>
         {/* </View>
         <View> */}
             <Text>
-                {`Please enter ${' '}${titleText} ${' '} values carefully`}
+                {`Please enter ${textTitle} values carefully`}
             </Text>
         </View>
       </View>

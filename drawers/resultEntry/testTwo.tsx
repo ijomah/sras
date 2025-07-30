@@ -98,7 +98,7 @@ const SecondTestScore = ({navigation, route}: any) => {
 
         <SafeAreaView>
             <ScrollView>
-              <TopDecor textTitle={'Second Test'}/>
+              <TopDecor textTitle="Second Test"/>
             <MultiSelect 
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}

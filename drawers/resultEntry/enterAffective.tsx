@@ -11,6 +11,7 @@ import { Alert, Button, ScrollView, StyleSheet, Text,
 import { Table, TableWrapper, Row, Cell } from 'react-native-reanimated-table';
 import { StudentContext } from '../../context/studContext';
 import { saveData } from '../../api/genApi';
+import TopDecor from '../../unitParts/decor';
 
 export default function AffectiveEntry(props: any) {
     const studentData = useContext(StudentContext);
@@ -183,7 +184,7 @@ export default function AffectiveEntry(props: any) {
 
     return (
         <View style={styles.container}>
-            
+            <TopDecor textTitle="Affective" />
             <Text 
                 style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
             >

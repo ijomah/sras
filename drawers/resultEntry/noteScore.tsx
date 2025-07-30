@@ -100,7 +100,7 @@ const NoteScore = ({route}: any) => {
 
         <SafeAreaView>
             <ScrollView>
-              <TopDecor textTitle={'Note Score'} />
+              <TopDecor textTitle="Note" />
             <MultiSelect 
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}

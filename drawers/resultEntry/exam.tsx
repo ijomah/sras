@@ -9,6 +9,7 @@ import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { StudentContext } from "../../context/studContext";
 import { saveData } from "../../api/genApi";
+import TopDecor from "../../unitParts/decor";
 
 const ExamScore = ({route}: any) => {
     const [selected, setSelected] = useState([]);
@@ -98,6 +99,7 @@ const ExamScore = ({route}: any) => {
 
         <SafeAreaView>
             <ScrollView>
+              <TopDecor textTitle="Examination" />
             <MultiSelect 
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}

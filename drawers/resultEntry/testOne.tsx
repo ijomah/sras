@@ -99,7 +99,7 @@ const FirstTestScore = ({route}: any) => {
 
         <SafeAreaView>
             <ScrollView>
-              <TopDecor titleText = 'First Test'/>
+              <TopDecor textTitle = "First Test"/>
             <MultiSelect 
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}

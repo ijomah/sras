@@ -81,7 +81,7 @@ export default function PsychomotorEntry(props: any) {
 
             return (
             <View style={styles.container}>
-                <TopDecor textTitle={'Psychomotor'} />
+                <TopDecor textTitle="Psychomotor" />
               <Text
                 style={{alignSelf: 'center', fontSize: 20, fontWeight: '500'}}
               >
