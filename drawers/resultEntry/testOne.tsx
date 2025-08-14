@@ -9,7 +9,7 @@ import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
 import { StudentContext } from "../../context/studContext";
 import { saveData } from "../../api/genApi";
-const FirstTestScore = ({route}: any) => {
+const FirstTestScore = ({route, editObj}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
     const [subId, setSubId] = useState('');
@@ -80,6 +80,9 @@ const FirstTestScore = ({route}: any) => {
       setTimeout(() => setEditing(false), 200);
     }
 
+    //save api-data to state variable
+    setUserForm(editObj)
+    
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
         
       return (
@@ -175,7 +178,7 @@ const FirstTestScore = ({route}: any) => {
                     marginTop:78,
                 }}>
                 <Button 
-                    title="Submit"
+                    title={editObj? "Save Changes":"Submit"}
                     onPress={submitForm}
                     disabled={errForRegInput}
                 />
@@ -190,7 +193,7 @@ const styles = StyleSheet.create({
     dropdownPages: {
       flex: 1,
       backgroundColor: 'transparent',
-      color: 'blue',
+      color: '#DB6D32',
       justifyContent: 'center',
       
     },  
@@ -200,7 +203,7 @@ const styles = StyleSheet.create({
       dropdown: {
         height: 50,
         width: 410,
-        backgroundColor: '#B7E0F7',
+        backgroundColor: 'white',
         borderRadius: 12,
         padding: 12,
         shadowColor: '#000',
@@ -233,10 +236,10 @@ const styles = StyleSheet.create({
         marginBottom: 5
       },
       docsTitleTextInput: {
-        borderColor: '#5C8FAB',
+        borderColor: '#DB6D32',
         borderWidth: 3,
         height: 50,
-        backgroundColor: '#B7E0F7',
+        backgroundColor: 'white',
         fontSize: 16,
         borderRadius: 10,
         padding: 5

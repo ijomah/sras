@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     loginForm: {
         // backgroundColor: '#B7E0F7',
         width: '80%',
-        borderColor: '#5CBFAB',
+        borderColor: '#DB6D32',
         borderWidth: 4,
         height: 400,
         justifyContent: 'center',

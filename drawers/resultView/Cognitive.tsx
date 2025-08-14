@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 
 // import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import { Table, TableWrapper, Row } from 'react-native-reanimated-table';
 import TopDecor from '../../unitParts/decor';
+import EditingPen from '../../unitParts/editPen';
 
 
 export default function CognitPage(props: any) {
@@ -13,8 +15,8 @@ export default function CognitPage(props: any) {
         const [affectiveData, setAffetiveData] = useState([]);
         const {tableHeadDet, tableBodyDet}  = props
               const val = {
-                tableHead: ['S/N', 'NAME', 'TEST1', 'TEST2', 'EXAM', 'TOTAL', 'GRADE', 'REMARK'],
-                widthArr: [30, 200, 60, 60, 60, 60, 60, 100]
+                tableHead: ['S/N', 'SUBJECTS', 'CA', 'EXAM', 'TOTAL', 'GRADE', 'REMARK'],
+                widthArr: [30, 200, 60, 60, 60, 60, 80]
             }
                   const [tableVal, setTableVal] = useState(val);
                   
@@ -46,13 +48,16 @@ export default function CognitPage(props: any) {
                           <Table borderStyle={{borderWidth: 1, borderColor: '#DB6D32'}}>
                               {
                               tableData.map((rowData, index) => (
+                                <View style={{flexDirection:'row-reverse'}}>
+                                  <EditingPen apiPath=''/>
                                   <Row
-                                  key={index}
-                                  data={rowData}
-                                  widthArr={state.widthArr}
-                                  style={[styles.row, {backgroundColor: '#F7F6E7'}]}
-                                  textStyle={styles.text}
+                                    key={index}
+                                    data={rowData}
+                                    widthArr={state.widthArr}
+                                    style={[styles.row, {backgroundColor: '#F7F6E7'}]}
+                                    textStyle={styles.text}
                                   />
+                                </View>
                               ))
                               }
                           </Table>

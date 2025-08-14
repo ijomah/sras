@@ -1,13 +1,18 @@
-import React, {useContext} from "react";
+import React, {useContext,useState} from "react";
 import { SafeAreaView, View, Text, StyleSheet, Image,Button, Alert } from "react-native";
+
+import * as Clipboard from 'expo-clipboard';
+
 import MyTextInput from "../../unitParts/reuseTextInput";
 import { isInputValid } from "../../unitParts/errFunc";
-import { useState } from "react";
+
 import { StudentContext } from "../../context/studContext";
 
-export default function CommentPart(this: any) {
+
+export default function CommentPart(this: any,editObj:any) {
     const studentData = useContext(StudentContext);
     const [inputText, setInputText] = useState()
+    const [copiedText, setCopiedText] = useState('');
 
     const [userForm, setUserForm] = useState({
         id: studentData.id,
@@ -66,6 +71,19 @@ export default function CommentPart(this: any) {
             // })
     }
     
+    //save api-data to state variable
+    setUserForm(editObj)
+    
+    //copyToClipboard
+
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync('hello world');
+  };
+
+  const fetchCopiedText = async () => {
+    const text = await Clipboard.getStringAsync();
+    setCopiedText(text);
+  };
     return (
         <SafeAreaView>
             <View style={styles.commentPix}>
@@ -99,10 +117,17 @@ export default function CommentPart(this: any) {
                     marginTop:160,
                 }}>
                 <Button 
-                    title="Submit"
+                    title={editObj? "Save Changes":"Submit"}
                     onPress={submitForm}
                     disabled={errForRegInput}
                 />
+            </View>
+
+            {/* copyToClipboard */}
+            <View >
+                <Button title="Click here to copy to Clipboard" onPress={copyToClipboard} />
+                <Button title="View copied text" onPress={fetchCopiedText} />
+                <Text style={styles.copiedText}>{copiedText}</Text>
             </View>
         </SafeAreaView>
     )
@@ -118,6 +143,10 @@ const styles = StyleSheet.create({
     commentPix:{
         alignItems:'center',
         justifyContent:'center',
-    }
+    },
+    copiedText: {
+    marginTop: 10,
+    color: 'red',
+  },
 
 })

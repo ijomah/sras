@@ -3,8 +3,11 @@ import { SafeAreaView, Button, StyleSheet, Text, View, ScrollView, TouchableOpac
 import { Dropdown, MultiSelect } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
+import * as Clipboard from 'expo-clipboard';
+
 import { studentList } from '../data';
 import MyTextInput from '../unitParts/reuseTextInput';
+import TopDecor from '../unitParts/decor';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -52,6 +55,19 @@ import MyTextInput from '../unitParts/reuseTextInput';
         </View>
     );
   };
+
+  // copyToClipboard
+
+    const [copiedText, setCopiedText] = useState('');
+
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync('hello world');
+  };
+
+  const fetchCopiedText = async () => {
+    const text = await Clipboard.getStringAsync();
+    setCopiedText(text);
+  };
     const renderLabel = () => {
       if (value || isFocus) {
         return (
@@ -66,6 +82,7 @@ import MyTextInput from '../unitParts/reuseTextInput';
     return (
       <>
       <SafeAreaView>
+        <Text>{"Admin Center"}</Text>
             <View>
             <View style={styles.container}>
               {renderLabel()}
@@ -186,6 +203,13 @@ import MyTextInput from '../unitParts/reuseTextInput';
                     />
                 </View>
               </View>
+
+              {/* copyToClipboard */}
+              <View style={styles.container}>
+                <Button title="Click here to copy to Clipboard" onPress={copyToClipboard} />
+                <Button title="View copied text" onPress={fetchCopiedText} />
+                <Text style={styles.copiedText}>{copiedText}</Text>
+              </View>
       {/* adding student */}
 
       <View style={styles.container1}>
@@ -218,6 +242,10 @@ import MyTextInput from '../unitParts/reuseTextInput';
   export default SchoolHead;
 
   const styles = StyleSheet.create({
+    copiedText: {
+    marginTop: 10,
+    color: 'red',
+  },
     container: {
       backgroundColor: 'white',
       padding: 16,

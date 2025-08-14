@@ -12,7 +12,7 @@ import { StudentContext } from "../../context/studContext";
 import { saveData } from "../../api/genApi";
 import TopDecor from "../../unitParts/decor";
 
-const NoteScore = ({route}: any) => {
+const NoteScore = ({route, editObj}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
     const [inputText, setInputText] = useState()
@@ -81,6 +81,9 @@ const NoteScore = ({route}: any) => {
       setTimeout(() => setEditing(false), 200);
     }
 
+    //save api-data to state variable
+    setUserForm(editObj)
+    
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
           
       return (
@@ -175,7 +178,7 @@ const NoteScore = ({route}: any) => {
                     marginTop:78,
                 }}>
                 <Button 
-                    title="Submit"
+                    title={editObj? "Save Changes":"Submit"}
                     onPress={submitForm}
                     disabled={errForRegInput}
                 />

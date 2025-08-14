@@ -4,6 +4,8 @@ import { SafeAreaView,
     StyleSheet, 
     ScrollView } from "react-native";
 
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 export default function ViewComment() {
     return (
         // <SafeAreaView>
@@ -18,7 +20,7 @@ export default function ViewComment() {
             </View>
             <View>
                 <View style={styles.combox}>
-
+                    <MaterialCommunityIcons name="pen" size={15} color='gray' />
                     <Text 
                         style={styles.teacherComment}
                     >Teacher's Comment:</Text>

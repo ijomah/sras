@@ -20,7 +20,7 @@ export default function TopDecor({textTitle}:any) {
       <View >
         <View>
             <Text>
-                {`Values for ${textTitle}`}
+                {`Values for ${textTitle} Result`}
             </Text>
         {/* </View>
         <View> */}

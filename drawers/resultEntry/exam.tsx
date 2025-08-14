@@ -11,7 +11,7 @@ import { StudentContext } from "../../context/studContext";
 import { saveData } from "../../api/genApi";
 import TopDecor from "../../unitParts/decor";
 
-const ExamScore = ({route}: any) => {
+const ExamScore = ({route, editObj}: any) => {
     const [selected, setSelected] = useState([]);
     const studentData = useContext(StudentContext);
     const [editing, setEditing] = useState(false);
@@ -19,7 +19,7 @@ const ExamScore = ({route}: any) => {
 
     const [userForm, setUserForm] = useState({
       //pass schId here as well
-        id: studentData.id,
+        // id: studentData.id,  //this id should come from the backend/sheet row no.
         name: studentData.name,
         subId: ''
         // label: '',
@@ -34,6 +34,7 @@ const ExamScore = ({route}: any) => {
         // console.log('identifier-val', valIdentifier, typedVal)
         setUserForm({...userForm, subId: selected[0], [valIdentifier]: typedVal})
         console.log('state part', userForm)
+        // console.log('state part', inputText)
         setErrForRegInput(false);
     }
 
@@ -82,6 +83,9 @@ const ExamScore = ({route}: any) => {
 
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
       
+      //saving the API-data in state variable
+    setUserForm(editObj);
+
       return (
             <View style={styles.item}>
                 <Text style={styles.selectedTextStyle}>{item.label}</Text>
@@ -175,7 +179,7 @@ const ExamScore = ({route}: any) => {
                     marginTop:78,
                 }}>
                 <Button 
-                    title="Submit"
+                    title={editObj? "Save Changes":"Submit"}
                     onPress={submitForm}
                     disabled={errForRegInput}
                 />
