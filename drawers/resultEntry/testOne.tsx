@@ -81,7 +81,7 @@ const FirstTestScore = ({route, editObj}: any) => {
     }
 
     //save api-data to state variable
-    setUserForm(editObj)
+    // setUserForm(editObj)
     
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
         

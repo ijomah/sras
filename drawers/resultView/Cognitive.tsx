@@ -49,7 +49,7 @@ export default function CognitPage(props: any) {
                               {
                               tableData.map((rowData, index) => (
                                 <View style={{flexDirection:'row-reverse'}}>
-                                  <EditingPen apiPath=''/>
+                                  {/* <EditingPen apiPath=''/> */}
                                   <Row
                                     key={index}
                                     data={rowData}

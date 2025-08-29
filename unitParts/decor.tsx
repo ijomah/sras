@@ -16,7 +16,12 @@ export default function TopDecor({textTitle}:any) {
     return (
       <LinearGradient style={{width: width, height: height / 5, padding: width / 10, borderColor: '#DB6D32',
         backgroundColor: '#DB6D32', 
-         borderBottomLeftRadius: 100, borderBottomRightRadius: 100,}} colors={['#DB6D32','#56DB32', '#DB6D32']} start={{x: 0.9, y: 0.01}}>
+         borderBottomLeftRadius: 100, borderBottomRightRadius: 100,}} 
+         colors={['#DB6D32','#56DB32']} 
+         start={{x: 0.5, y: 0.5}}
+         end={{ x: 0.1, y: 0.2 }}
+         locations={[0.4, 0.6]}
+         >
       <View >
         <View>
             <Text>

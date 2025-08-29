@@ -69,10 +69,12 @@ export default function CommentPart(this: any,editObj:any) {
             //    let phoneDbId = dat.rows._array[0].dbUser_id
             // console.log('phoneDbId', phoneDbId)
             // })
+
+             //save api-data to state variable
+        setUserForm(editObj)
     }
     
-    //save api-data to state variable
-    setUserForm(editObj)
+   
     
     //copyToClipboard
 
@@ -117,7 +119,8 @@ export default function CommentPart(this: any,editObj:any) {
                     marginTop:160,
                 }}>
                 <Button 
-                    title={editObj? "Save Changes":"Submit"}
+                    // title={editObj? "Save Changes":"Submit"}
+                    title={"Submit"}
                     onPress={submitForm}
                     disabled={errForRegInput}
                 />

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, StyleSheet, FlatList, SafeAreaView, Image, TouchableOpacity, View, Text } from "react-native";
+import LogoutButton from "./logout";
 
 const Dashboard = ({navigation}: any) => {
     // const blurhash ='|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
@@ -36,7 +37,7 @@ const Dashboard = ({navigation}: any) => {
     }
     return(
         <SafeAreaView style={styles.container}>
-           
+           <LogoutButton/>
             {/* <View>
                 <Image 
                     source={require(blurhash)}

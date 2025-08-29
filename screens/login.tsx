@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Alert, Image, TouchableOpacity, TextInputCompon
 
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { useAuth0 } from "react-native-auth0";
 
 // import {
 //   GoogleOneTapSignIn,
@@ -13,6 +14,8 @@ function LoginPage({navigation}: any) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hideShow, setHideShow] = useState(true);
+
+    const {authorize} = useAuth0();
 
     const handleChangeEmail = (typedEmail: any) => {
         setEmail(typedEmail)
@@ -41,6 +44,21 @@ function LoginPage({navigation}: any) {
         setHideShow(!hideShow); 
     }; 
 
+
+    // const LoginButton = () => {
+        // const {authorize} = useAuth0();
+
+        const logonPress = async () => {
+            try {
+                await authorize();
+                // navigation.navigate('dash');
+            } catch (e) {
+                console.log(e);
+            }
+        };
+
+        // return <Button onPress={onPress} title="Log in" />
+    // }
     //g-sign-in
    
 
@@ -146,7 +164,7 @@ const startSignInFlow = async () => {
 
             <View style={{justifyContent:'space-between',minHeight:200}}>
                 <View>
-                    <TouchableOpacity style={styles.iconInput} onPress={()=>console.log('authServer')}>
+                    <TouchableOpacity style={styles.iconInput} onPress={logonPress}>
                     <Text style={styles.socialStyle}>{'Sign with Google'}</Text>    
                     </TouchableOpacity>
                 </View>

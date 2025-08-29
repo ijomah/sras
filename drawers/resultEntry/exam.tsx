@@ -84,7 +84,7 @@ const ExamScore = ({route, editObj}: any) => {
     const renderItem = (item: { label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
       
       //saving the API-data in state variable
-    setUserForm(editObj);
+    // setUserForm(editObj);
 
       return (
             <View style={styles.item}>

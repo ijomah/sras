@@ -33,7 +33,12 @@
       }
     },
     "plugins": [
-      
+      [
+        "react-native-auth0",
+        {
+          "domain": "dev-a5l4tidpguu30ikt.us.auth0.com"
+        }
+      ]
     ]
   }
 }

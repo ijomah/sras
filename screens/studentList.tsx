@@ -1,6 +1,7 @@
 // import { DefaultTheme } from "@react-navigation/native";
 import React from "react";
 import { SafeAreaView, Image, StyleSheet, FlatList, TouchableOpacity, Text, View } from "react-native";
+import EditingPen from "../unitParts/editPen";
 
 // import { places } from "../data";
 

@@ -35,28 +35,28 @@ const ResultEditDrawer = ({route}: any) => {
         <StudentContext.Provider value={studValue}>
             <Navigator drawerContent={(props)=>(<CustomDrawerContent {...props}/>)}>
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="text" size={24} color={color} />)
                 }} name="resEdit" component={CommentPart} />
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="menu" size={24} color={color} />)
                 }} name="test1" component={FirstTestScore} />
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="mail" size={24} color={color} />)
                 }} name="test2" component={SecondTestScore} />
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="book" size={24} color={color} />)
                 }} name="notes" component={NoteScore} />
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="history" size={24} color={color} />)
                 }} name="exam" component={ExamScore} />
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="details" size={24} color={color} />)
                 }} name="psychoEntry" component={PsychomotorEntry} />
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="bee" size={24} color={color} />)
                 }} name="affectEntry" component={AffectiveEntry} />
                 <Screen options={{
-                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="head-cog" size={24} color={color} />)
+                    drawerIcon: ({color})=>(<MaterialCommunityIcons name="application-settings" size={24} color={color} />)
                 }} name='settings' component={SettingsScreen} />
             </Navigator>
         </StudentContext.Provider>

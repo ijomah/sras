@@ -14,6 +14,7 @@ import SchoolHead from './screens/schHeads';
 import ResultPreviewer from './screens/resultPreviewer';
 import ManageRegForm from './forms/manageRegForm';
 
+import {Auth0Provider} from 'react-native-auth0';
 
 import ResultEditDrawer from './drawers/resultEntry/drawer';
 import ResultViewDrawer from './drawers/resultView/viewDrawer';
@@ -23,6 +24,7 @@ const {Navigator, Screen} = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
+      <Auth0Provider domain={"dev-a5l4tidpguu30ikt.us.auth0.com"} clientId={"MhWEMhnB7AupJnxmiskQKplUn6PFvPbX"}>
       <Navigator>
         <Screen name='home' component={HomePage} />
         <Screen name='login' component={LoginPage} />
@@ -45,6 +47,7 @@ export default function App() {
           options={{headerShown: false}}
         />
       </Navigator>
+      </Auth0Provider>
     </NavigationContainer>
   );
 }
