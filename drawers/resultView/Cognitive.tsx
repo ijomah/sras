@@ -1,19 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-
-// import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-
-import { Table, TableWrapper, Row } from 'react-native-reanimated-table';
+import { Table, Row } from 'react-native-reanimated-table';
 import TopDecor from '../../unitParts/decor';
-import EditingPen from '../../unitParts/editPen';
 
 
-export default function CognitPage(props: any) {
+export default function CognitPage() {
+// export default function CognitPage(props: any) {
+
   
-        const [affectiveData, setAffetiveData] = useState([]);
-        const {tableHeadDet, tableBodyDet}  = props
+        // const [affectiveData, setAffetiveData] = useState([]);
+        // const {tableHeadDet, tableBodyDet}  = props
               const val = {
                 tableHead: ['S/N', 'SUBJECTS', 'CA', 'EXAM', 'TOTAL', 'GRADE', 'REMARK'],
                 widthArr: [30, 200, 60, 60, 60, 60, 80]
@@ -45,11 +42,11 @@ export default function CognitPage(props: any) {
                           <Row data={state.tableHead} widthArr={state.widthArr} style={styles.header} textStyle={styles.text}/>
                           </Table>
                           <ScrollView style={styles.dataWrapper}>
-                          <Table borderStyle={{borderWidth: 1, borderColor: '#DB6D32'}}>
+                          <Table 
+                          borderStyle={{borderWidth: 1, borderColor: '#DB6D32'}}
+                          >
                               {
                               tableData.map((rowData, index) => (
-                                <View style={{flexDirection:'row-reverse'}}>
-                                  {/* <EditingPen apiPath=''/> */}
                                   <Row
                                     key={index}
                                     data={rowData}
@@ -57,7 +54,6 @@ export default function CognitPage(props: any) {
                                     style={[styles.row, {backgroundColor: '#F7F6E7'}]}
                                     textStyle={styles.text}
                                   />
-                                </View>
                               ))
                               }
                           </Table>
@@ -74,5 +70,4 @@ export default function CognitPage(props: any) {
         text: { textAlign: 'center', fontWeight: '400'},
         dataWrapper: { marginTop: -1 },
         row: { height: 40, backgroundColor: '#E7E6E1' }
-        });    
-      
+        });      

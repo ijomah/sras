@@ -6,9 +6,13 @@ import { useState } from 'react';
 
 import { Table, TableWrapper, Row } from 'react-native-reanimated-table';
 
+import * as Print from 'expo-print';
+import { shareAsync } from 'expo-sharing';
+import { html } from '../../sch-res-PDF-output/otega-senior';
+
 
 export default function ClassBroadSheetPage(props: any) {
-  
+  const [selectedPrinter, setSelectedPrinter] = useState();
         const [affectiveData, setAffetiveData] = useState([]);
         const {tableHeadDet, tableBodyDet}  = props
         
@@ -42,6 +46,27 @@ export default function ClassBroadSheetPage(props: any) {
                   const getArmTable = (gr: []) => {
                     return gr.filter((a)=> a ==='NAME' || a ==='TOTAL' || a ==='S/N')
                   }
+          
+          
+            const print = async () => {
+              // On iOS/android prints the given html. On web prints the HTML from the current page.
+               await Print.printAsync({
+                html
+                // printerUrl: selectedPrinter?.url, // iOS only
+              }); 
+            };
+          
+            const printToFile = async () => {
+              // On iOS/android prints the given html. On web prints the HTML from the current page.
+               const { uri } = await Print.printToFileAsync({ html }); 
+              console.log('File has been saved to:', uri);
+              await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+            };
+          
+            const selectPrinter = async () => {
+               const printer = await Print.selectPrinterAsync(); // iOS only
+              // setSelectedPrinter(printer);
+            };
                   
                   return (
                   <View style={styles.container}>
@@ -55,6 +80,7 @@ export default function ClassBroadSheetPage(props: any) {
                         title="Download"
                         color={'#56DB32'}
                         // onPress={toPdf}
+                        onPress={printToFile}
                       />
                       <Button 
                         title="Class"
@@ -65,6 +91,7 @@ export default function ClassBroadSheetPage(props: any) {
                         title="Download"
                         color={'#56DB32'}
                         // onPress={toPdf}
+                        onPress={print}
                       />
                     </View>
                     <Text

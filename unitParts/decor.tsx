@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import {Image, Text, useWindowDimensions, View} from 'react-native';
+import { Text, useWindowDimensions, View} from 'react-native';
 
 // export default function ImageHeader() {
 //     return (

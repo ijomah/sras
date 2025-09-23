@@ -47,10 +47,27 @@ function LoginPage({navigation}: any) {
 
     // const LoginButton = () => {
         // const {authorize} = useAuth0();
-
+// await authorize({
+//                     connection: 'google-oauth2',
+//                     scope: 'openid profile offline_access',
+//                     audience: 'https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/spreadsheets.readonly',
+//                     redirectUrl: '',
+//                     additionalParameters: {
+//                         access_type: 'offline',
+//                         prompt: 'consent'
+//                     }
         const logonPress = async () => {
             try {
-                await authorize();
+                const authRes = await authorize({
+                    connection: 'google-oauth2',
+                    scope: 'openid profile offline_access',
+                    // audience: 'https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/spreadsheets.readonly',
+                    // additionalParameters: {
+                    //     access_type: 'offline',
+                    //     prompt: 'consent'
+                    // }
+                });
+                console.log('auth', authRes);
                 // navigation.navigate('dash');
             } catch (e) {
                 console.log(e);
