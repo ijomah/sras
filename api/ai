@@ -1,0 +1,146 @@
+// // In your React Native app (making a request to your backend)
+// const updateUserMetadata = async (userId, newMetadata) => {
+//   const response = await fetch('https://your-backend.com/api/users/metadata', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': `Bearer ${userAccessToken}`, // User's access token for your backend
+//     },
+//     body: JSON.stringify({ userId, newMetadata }),
+//   });
+//   return response.json();
+// };
+
+// // In your backend proxy service (Node.js example)
+// app.post('/api/users/metadata', async (req, res) => {
+//   // 1. Authenticate the request from the React Native app (e.g., validate userAccessToken)
+//   // 2. Obtain a Management API access token using Client Credentials Grant
+//   //    (store client ID/secret securely, don't expose them)
+//   const managementApiToken = await getManagementApiToken(); // Function to get token
+  
+//   // 3. Make the call to Auth0 Management API
+//   const { userId, newMetadata } = req.body;
+//   const auth0ManagementApiUrl = `https://YOUR_AUTH0_DOMAIN/api/v2/users/${userId}`;
+//   const auth0Response = await fetch(auth0ManagementApiUrl, {
+//     method: 'PATCH',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': `Bearer ${managementApiToken}`,
+//     },
+//     body: JSON.stringify({ user_metadata: newMetadata }),
+//   });
+
+//   // 4. Process and return the response to the React Native app
+//   const data = await auth0Response.json();
+//   res.json(data);
+// });
+
+
+// // AI Overview
+// // Connecting a React Native application directly to the Auth0 Management API is generally not recommended due to security concerns. The Management API requires a highly privileged token, and embedding such a token directly in a client-side application like React Native creates a significant security risk.
+// // Instead, the recommended approach is to use a backend proxy service to mediate requests to the Auth0 Management API.
+// // Here's how this setup works:
+// // React Native App:
+// // Your React Native application makes requests to your custom backend service.
+// // These requests should be authenticated, typically using an access token obtained from Auth0 after a user logs in (using the react-native-auth0 SDK and the Authorization Code Flow with PKCE).
+// // Backend Proxy Service:
+// // This is a server-side application (e.g., Node.js, Python, .NET Core) that acts as an intermediary.
+// // It receives requests from your React Native app.
+// // It then performs a Client Credentials Grant exchange with Auth0 to obtain a Management API access token. This token is specific to your backend service and should never be exposed to the client.
+// // Using this Management API token, your backend service makes the necessary calls to the Auth0 Management API (e.g., to update user metadata, manage roles, etc.).
+// // Finally, your backend service processes the response from the Management API and returns the relevant data to your React Native application.
+// // Advantages of this approach:
+// // Security: The sensitive Management API access token is never exposed to the client, reducing the risk of compromise.
+// // Centralized Logic: You can centralize the logic for interacting with the Management API in your backend, making it easier to manage and update.
+// // Granular Control: Your backend can enforce fine-grained authorization rules before making Management API calls, ensuring that only authorized actions are performed.
+
+
+
+// // Using Axios Interceptors for Global Handling:
+// // For more complex applications or to avoid repeating 
+// // the header configuration for every call, 
+// // Axios interceptors can be used to automatically add the 
+// // Authorization header to all requests made by a specific 
+// // Axios instance.
+
+// async function makeAuthorizedCall(endpoint, accessToken, method = 'GET', data = null) {
+//   try {
+//     const options = {
+//       headers: {
+//         'Authorization': `Bearer ${accessToken}` // Add the access token as a Bearer token
+//       }
+//     };
+
+//     let response;
+//     switch (method.toUpperCase()) {
+//       case 'GET':
+//         response = await axios.get(endpoint, options);
+//         break;
+//       case 'POST':
+//         response = await axios.post(endpoint, data, options);
+//         break;
+//       case 'PUT':
+//         response = await axios.put(endpoint, data, options);
+//         break;
+//       case 'DELETE':
+//         response = await axios.delete(endpoint, options);
+//         break;
+//       default:
+//         throw new Error('Unsupported HTTP method');
+//     }
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error in authorized call:', error.message);
+//     throw error;
+//   }
+// }
+
+// async function main() {
+//   try {
+//     const username = 'your_username';
+//     const password = 'your_password';
+
+//     // 1. Get the access token
+//     const token = await getAccessToken(username, password);
+//     console.log('Access Token:', token);
+
+//     // 2. Make an authorized call using the obtained token
+//     const protectedData = await makeAuthorizedCall('YOUR_PROTECTED_API_ENDPOINT', token);
+//     console.log('Protected Data:', protectedData);
+//   } catch (error) {
+//     console.error('Application Error:', error.message);
+//   }
+// }
+
+// main();
+
+
+// //different
+// const axiosInstance = axios.create({
+//   baseURL: 'YOUR_API_BASE_URL'
+// });
+
+// axiosInstance.interceptors.request.use(
+//   (config) => {
+//     // Retrieve the token from a secure storage (e.g., a variable, not local storage in Node.js)
+//     const storedToken = getStoredAccessToken(); // Implement this function to retrieve your token
+//     if (storedToken) {
+//       config.headers['Authorization'] = `Bearer ${storedToken}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
+// // Now, any request made with axiosInstance will automatically include the Authorization header
+// async function callWithInterceptor(endpoint) {
+//   try {
+//     const response = await axiosInstance.get(endpoint);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error with interceptor call:', error.message);
+//     throw error;
+//   }
+// }

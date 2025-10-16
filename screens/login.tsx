@@ -5,6 +5,8 @@ import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth0 } from "react-native-auth0";
 
+import { apiAuth0Send } from "../api/authMgtApi";
+
 // import {
 //   GoogleOneTapSignIn,
 //   GoogleLogoButton,
@@ -68,9 +70,10 @@ function LoginPage({navigation}: any) {
                     // }
                 });
                 console.log('auth', authRes);
+                apiAuth0Send(authRes);
                 // navigation.navigate('dash');
             } catch (e) {
-                console.log(e);
+                console.log('login err: ', e);
             }
         };
 

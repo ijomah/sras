@@ -7,7 +7,8 @@ import * as Clipboard from 'expo-clipboard';
 
 import { studentList } from '../data';
 import MyTextInput from '../unitParts/reuseTextInput';
-import TopDecor from '../unitParts/decor';
+
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
   const data = [
     { label: 'Item 1', value: '1' },
@@ -171,59 +172,49 @@ import TopDecor from '../unitParts/decor';
                     onPress={listStudents}
                 />
         </SafeAreaView>
-        <View style={{alignItems:'center',justifyContent:'space-between',minHeight:180}}>
-              <View 
-            //  style={
-            //         styles.appliName
-            //       }
-              >
-                    <MyTextInput 
-                        label="Spread Sheet ID:" 
+        <View style={{flexDirection:'row', height:2}}>
+              <View>
+                <MyTextInput 
+                    label="Spread Sheet ID:" 
                         // inputErr={errInData.lname}
-                        inputConfig={{
-                            placeholder:"id",
-                            // keyboardType:"numeric",
-                            // onChangeText:setReg.bind(this, 'sheetId')
-                        }}
-                    />
+                    inputConfig={{
+                    placeholder:"id",
+                    // keyboardType:"numeric",
+                    // onChangeText:setReg.bind(this, 'sheetId')
+                    }}
+                />
                 </View>
-                <View 
-            //  style={
-            //         styles.appliName
-            //       }
-              >
-                    <MyTextInput 
-                        label="Service Id:" 
-                        // inputErr={errInData.lname}
-                        inputConfig={{
-                            placeholder:"id:",
-                            // keyboardType:"numeric",
-                            // onChangeText:setReg.bind(this, 'serviceId')
-                        }}
-                    />
-                </View>
+                <MaterialCommunityIcons style={{alignSelf:'auto'}} name="plus" onPress={copyToClipboard} size={44}  />
               </View>
 
               {/* copyToClipboard */}
-              <View style={styles.container}>
-                <Button title="Click here to copy to Clipboard" onPress={copyToClipboard} />
-                <Button title="View copied text" onPress={fetchCopiedText} />
+              {/* <View style={styles.container}> */}
+                
+                {/* <Button title="Click here to copy to Clipboard" onPress={copyToClipboard} />
+                <Button title="View copied text" onPress={fetchCopiedText} /> */}
                 <Text style={styles.copiedText}>{copiedText}</Text>
-              </View>
+              {/* </View> */}
       {/* adding student */}
 
       <View style={styles.container1}>
             <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Add new Student"
-                value={newItemText}
-                onChangeText={setNewItemText}
-              />
-              
-              <Button title="Add Item" onPress={addItem} />
+              <View>
+               <MyTextInput 
+                        label="Service Id:" 
+                        // inputErr={errInData.lname}
+                        inputConfig={{
+                            placeholder:"Add new Student",
+                            value:{newItemText},
+                            // onChangeText:{setNewItemText}
+                            // keyboardType:"numeric",
+                            // onChangeText:setReg.bind(this, 'serviceId')
+                        }}
+                    />
+              </View>
+              <MaterialCommunityIcons name="plus" onPress={addItem} size={24} />
             </View>
-      
+            {/* <Button title="Add Item" onPress={addItem} /> */}
+            
             <FlatList
               data={items}
               keyExtractor={(item:any) => item.id}
