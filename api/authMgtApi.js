@@ -4,7 +4,7 @@ export const apiAuth0Send = (tokensObj) => {
   // var mgtApiAccessToken;
   var options = {
     method: 'POST',
-    url: 'http://localhost:3000/api/private',
+    url: 'https://srasproxy.onrender.com/api/private',
     // url: 'http://192.168.42.138:8081/api/private',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
@@ -14,18 +14,19 @@ export const apiAuth0Send = (tokensObj) => {
       grant_type: 'client_credentials',
       client_id: 'ZrPJHabBbjFefV8H5HA6Mmq0Wti3ea3B',
       client_secret: 'Hf4KxO3zAsO0PZEsl07a8DnbWHNYurIaeFg03Vw5LCx86F45HiXUMMyT8P3SR_PR',
-      audience: 'https://dev-a5l4tidpguu30ikt.us.auth0.com/api/v2/'
+      audience:'https://srasproxy.onrender.com/api/private'
+      // audience: 'https://dev-a5l4tidpguu30ikt.us.auth0.com/api/v2/'
     })
   };
 
 
   axios.request(options).then(function (response) {
-    console.log('authMgtApi file: ', response.data);
+    console.log('myApiResp: ', JSON.stringify(response.data));
 
     // mgtApiAccessToken = response.data;
     // getIdpData(response.data.accessToken);
   }).catch(function (error) {
-    console.error('authMgtApi Err: ', error);
+    console.error('myApi Err: ', error);
   });
   // return mgtApiAccessToken;
 }
